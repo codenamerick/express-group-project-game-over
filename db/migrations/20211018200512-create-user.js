@@ -24,11 +24,11 @@ module.exports = {
       email: {
         allowNull: false,
         unique: true,
-        type: Sequelize.STRING(255),
+        type: Sequelize.STRING(100),
       },
       hashed_password: {
         allowNull: false,
-        type: Sequelize.STRING(255),
+        type: Sequelize.STRING.BINARY,
       },
       createdAt: {
         allowNull: false,

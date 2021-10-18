@@ -19,11 +19,11 @@ module.exports = (DataTypes, DataTypes) => {
       email: {
         allowNull: false,
         unique: true,
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(100),
       },
       hashed_password: {
         allowNull: false,
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING.BINARY,
       },
     },
     {}
