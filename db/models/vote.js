@@ -1,10 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Vote = sequelize.define('Vote', {
-    id: {
-      allowNull: false,
-      type: DataTypes.INTEGER
-    },
     up_vote: {
       allowNull: false,
       type: DataTypes.BOOLEAN
