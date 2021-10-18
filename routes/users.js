@@ -3,9 +3,17 @@ const router = express.Router();
 const { csrfProtection, asyncHandler } = require('./utils')
 const db = require('../db/models')
 const { User } = db
+
+
 /* GET users listing. */
+
+// insert user creation validators
+
+
+// get routes
 router.get('/sign-up', csrfProtection ,asyncHandler(async(req, res) => {
-  res.send('respond with a resource');
+  const user =await User.build();
+  res.render('sign-up', { user, csrfToken: req.csrfToken() });
 
 }));
 
