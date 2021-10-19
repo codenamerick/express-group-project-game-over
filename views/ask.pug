@@ -7,7 +7,12 @@ block content
     form
       input(name='_csrf' type='hidden' value=csrfToken)
       div
+        label(for='title')
+      div
+        
+      div
         label(for='question') What would you like to know?
+      div
         textarea(name='question')
       div
         button Ask Question

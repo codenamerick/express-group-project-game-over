@@ -3,9 +3,11 @@ extends layout.pug
 include utils.pug
 
 block content
-  div(class='questionContainer')
-    form
-      input(name='_csrf' type='hidden' value=csrfToken)
-      div
-        label(for='question') What would you like to know?
-        textarea(name='question' value=question.question)
+  div
+    table
+      thead All Questions
+        th Questions
+      tbody
+        each question in questions
+          tr
+            td(value=question.id) questions.question
