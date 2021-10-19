@@ -7,7 +7,10 @@ const { check, validationResult } = require('express-validator');
 // TODO: add requiredAuth to access questions text field
 
 router.get('/', asyncHandler(async (req, res) => {
-  res.send(' This is the questions page')
-}))
+  res.render('questions')
+}));
+
+
+
 
 module.exports = router;
