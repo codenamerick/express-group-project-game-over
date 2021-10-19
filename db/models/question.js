@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, {});
   Question.associate = function(models) {
     // associations can be defined here
