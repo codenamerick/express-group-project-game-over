@@ -7,49 +7,49 @@ module.exports = {
       [
         {
           question: "How do I connect my wireless controller to my xbox one? ",
-          title: 'Wireless Controller'
+          title: 'Wireless Controller',
           user_id: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           question: "How do I beat level 5 on Gears5",
-          title:
+          title:'Stuck on Gears 5',
           user_id: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           question: "Where is the RadAway in fallout shelter? ",
-          title:
+          title:'Help Finding RadAway',
           user_id: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           question: "What is the best position to play in 2k?",
-          title:
+          title:'2K Position Choice',
           user_id: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           question: "How do I earn VC in 2k?",
-          title:
+          title:'Earning VC',
           user_id: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           question: "How do I defeat the Enderman in Minecraft? ",
-          title:
+          title:'Defeating Enderman',
           user_id: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          question: "What are the best cheats for SIMS 4?",
-          title:
+          question: "What are the best mods and cheats for SIMS 4? I want to have unlimited money!",
+          title:'SIMS 4 Mods',
           user_id: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
