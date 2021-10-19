@@ -10,10 +10,55 @@ body {
     background: #F1F2F3;
 }
 
+a {
+    text-decoration: none;
+}
+
+/* --- Header styling below --- */
+
+header {
+    background: #F8F9F9;
+    box-shadow: 0 10px 25px rgb(0 0 0 / 5%), 0 20px 48px rgb(0 0 0 / 5%), 0 1px 4px rgb(0 0 0 / 10%);
+    padding: 16px;
+}
+
+header > div {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1240px;
+}
+
+.nav-left ul {
+    display: flex;
+    list-style: none;
+}
+
+.nav-left li {
+    margin-right: 16px;
+}
+
+.nav-right .main-btn {
+    margin-left: 16px;
+    padding: 6px 8px;
+}
+
+.nav-right .log-in-btn {
+    background: #E1ECF4;
+    border: 1px solid #2098FB;
+    color: #2098FB;
+}
+
+.nav-right .log-in-btn:hover {
+    color: #fff;
+}
+
+/* --- Login/Sign Up styling below --- */
+
 .userForm {
     background: white;
     padding: 24px;
-    max-width: 240px;
+    max-width: 300px;
     margin: 0 auto;
     border-radius: 6px;
     box-shadow: 0 10px 25px rgb(0 0 0 / 5%), 0 20px 48px rgb(0 0 0 / 5%), 0 1px 4px rgb(0 0 0 / 10%);
@@ -44,7 +89,6 @@ label {
     color: white;
     border: 1px solid #2098FB;
     transition: all 250ms;
-    font-size: 10px;
 }
 
 .main-btn:hover {
@@ -62,13 +106,8 @@ label {
     border: 1px solid #2098FB;
 }
 
-.userForm label {
-    font-size: 10px;
-}
-
 .form-errors {
     color: #DC5057;
-    font-size: 10px;
 }
 
 .form-errors li {
