@@ -83,7 +83,8 @@ router.post('/sign-up', csrfProtection, userValidator, asyncHandler( async( req,
     email
   })
 
-  if(!validatorErrors.length) {
+  if(validatorErrors.isEmpty()) {
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     user.hashed_password = hashedPassword
@@ -91,9 +92,13 @@ router.post('/sign-up', csrfProtection, userValidator, asyncHandler( async( req,
     // TODO: login user function
     res.redirect('/');
   } else {
+    console.log('You have errors!!!!');
     const errors = validatorErrors.array().map((error) => error.msg);
-    res.render('/sign-up', { user, errors , csrfToken: req.csrfToken() })
+    res.render('sign-up', { user, errors , csrfToken: req.csrfToken() })
   }
 
 }));
+
+
+
 module.exports = router;
