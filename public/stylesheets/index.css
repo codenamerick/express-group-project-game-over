@@ -24,9 +24,16 @@ header {
 
 header > div {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin: 0 auto;
     max-width: 1240px;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    width: 75%;
 }
 
 .nav-left ul {
@@ -39,7 +46,7 @@ header > div {
 }
 
 .nav-right .main-btn {
-    margin-left: 16px;
+    margin-left: 4px;
     padding: 6px 8px;
 }
 
@@ -53,7 +60,6 @@ header > div {
     color: #fff;
 }
 
-/* --- Login/Sign Up styling below --- */
 
 .userForm {
     background: white;
@@ -79,7 +85,7 @@ label {
     margin-bottom: 3px;
 }
 
-.userForm input, .main-btn {
+.userForm input, .main-btn, .searchForm input {
     padding: 6px 6px;
     border-radius: 4px;
 }
@@ -97,12 +103,12 @@ label {
     cursor: pointer;
 }
 
-.userForm input {
+.userForm input, .searchForm input {
     border: 1px solid #BABFC4;
     transition: all 250ms;
 }
 
-.userForm input:focus {
+.userForm input:focus, .searchForm input:focus {
     border: 1px solid #2098FB;
 }
 
@@ -112,4 +118,12 @@ label {
 
 .form-errors li {
     margin: 4px 0 4px 20px;
+}
+
+.searchForm {
+    width: 50%;
+}
+
+.searchForm input {
+    width: 100%;
 }

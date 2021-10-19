@@ -12,6 +12,9 @@ html
             li link
             li link
             li link
+          form(action="/" method='post').searchForm
+            input(type="hidden" name="_csrf" value=csrfToken)
+            input(type='text' placeholder='Search...' name="search" value=search)
         div.nav-right
           if locals.authenticated
             span #{user.first_name} logged in
