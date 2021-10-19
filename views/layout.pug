@@ -16,7 +16,7 @@ html
           if locals.authenticated
             span #{user.first_name} logged in
             form(action='/users/logout' method='post')
-              button Logout
+              button(class='main-btn') Logout
           else
             span
               a(href='/users/login' class='main-btn log-in-btn') Log in
