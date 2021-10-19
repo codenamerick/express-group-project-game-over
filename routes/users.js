@@ -4,6 +4,7 @@ const { csrfProtection, asyncHandler } = require('./utils');
 const db = require('../db/models');
 const { User } = db;
 const { check, validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
 
 
 /* GET users listing. */
@@ -79,13 +80,13 @@ router.post('/sign-up', csrfProtection, userValidator, asyncHandler( async( req,
     first_name,
     last_name,
     user_name,
-    email,
+    email
   })
 
   if(!validatorErrors.length) {
-    const hashedPassword = await bcrypt(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    user.hashedPassword = hashedPassword
+    user.hashed_password = hashedPassword
     await user.save();
     // TODO: login user function
     res.redirect('/');
