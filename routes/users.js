@@ -5,58 +5,78 @@ const db = require('../db/models');
 const { User } = db;
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const { loginUser }  = require('../auth')
 
 
 /* GET users listing. */
 
-// insert user creation validators
+// SIGNUP VALIDATORS
 const userValidator = [
-  check('first_name')
+  check("first_name")
     .exists({ checkFalsy: true })
     .withMessage(`Please provide a value for First Name.`)
     .isLength({ max: 50 })
-    .withMessage('First Name cannot be longer than 50 characters.'),
-  check('last_name')
+    .withMessage("First Name cannot be longer than 50 characters."),
+  check("last_name")
     .exists({ checkFalsy: true })
     .withMessage(`Please provide a value for Last Name.`)
     .isLength({ max: 50 })
-    .withMessage('Last Name cannot be longer than 50 characters.'),
-  check('email')
+    .withMessage("Last Name cannot be longer than 50 characters."),
+  check("user_name")
     .exists({ checkFalsy: true })
-    .withMessage('Please provide email address.')
+    .withMessage("Please provide a value for username.")
     .isLength({ max: 100 })
-    .withMessage('Email cannot be longer than 100 characters.')
+    .withMessage("Username cannot be longer than 100 characters.")
+    .custom((value) => {
+      return User.findOne({
+        where: {
+          user_name: value,
+        },
+      }).then((user) => {
+        if (user) {
+          return Promise.reject("Provided username already in use.");
+        }
+      });
+    }),
+  check("email")
+    .exists({ checkFalsy: true })
+    .withMessage("Please provide email address.")
+    .isLength({ max: 100 })
+    .withMessage("Email cannot be longer than 100 characters.")
     .isEmail()
-    .withMessage('Please enter a valid email address.')
+    .withMessage("Please enter a valid email address.")
     .custom((value) => {
       return User.findOne({
         where: {
           email: value,
+        },
+      }).then((user) => {
+        if (user) {
+          return Promise.reject("Provided email address already in use.");
         }
-      })
-      .then((user) => {
-        if(user) {
-          return Promise.reject('Provided email address already in use.')
-        }
-      })
+      });
     }),
-  check('password')
+  check("password")
     .exists({ checkFalsy: true })
-    .withMessage(' Please provide password.')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, 'g')
-    .withMessage('Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*")'),
-  check('confirm_password')
+    .withMessage(" Please provide password.")
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, "g")
+    .withMessage(
+      'Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*")'
+    ),
+  check("confirm_password")
     .exists({ checkFalsy: true })
-    .withMessage('Please confirm password.')
-    .custom((value, {req}) => {
-      if(value !== req.body.password) {
-        throw new Error('Passwords do not match.')
+    .withMessage("Please confirm password.")
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error("Passwords do not match.");
       }
-      return true
-    })
-]
+      return true;
+    }),
+];
 
-// get routes
+
+
+//SIGN UP ROUTES
 router.get('/sign-up', csrfProtection, asyncHandler(async(req, res) => {
   const user = await User.build();
   res.render('sign-up', { user, csrfToken: req.csrfToken() });
@@ -64,7 +84,6 @@ router.get('/sign-up', csrfProtection, asyncHandler(async(req, res) => {
 }));
 
 
-// post routes
 router.post('/sign-up', csrfProtection, userValidator, asyncHandler( async( req, res) => {
   const {
     first_name,
@@ -89,7 +108,8 @@ router.post('/sign-up', csrfProtection, userValidator, asyncHandler( async( req,
 
     user.hashed_password = hashedPassword
     await user.save();
-    // TODO: login user function
+   
+    loginUser(req, res, user);
     res.redirect('/');
   } else {
     console.log('You have errors!!!!');
@@ -99,6 +119,47 @@ router.post('/sign-up', csrfProtection, userValidator, asyncHandler( async( req,
 
 }));
 
+//LOGIN VALIDATOR
 
+const loginValidators = [
+  check("email")
+    .exists({ checkFalsy: true })
+    .withMessage("Please provide email address."),
+  check("password")
+    .exists({ checkFalsy: true })
+    .withMessage("Please enter valid password"),
+];
+
+//LOGIN ROUTES
+router.get('/login', csrfProtection, asyncHandler(async(req, res) => {
+
+  res.render('user-login', { csrfToken: req.csrfToken() })
+}));
+
+router.post('/login', csrfProtection, loginValidators, asyncHandler(async(req, res) => {
+ const { email, password } = req.body
+
+ const validatorErrors = validationResult(req);
+ let errors = [];
+ if(validatorErrors.isEmpty()){
+   const user = await User.findOne( {
+     where: {
+       email
+     }
+   })
+   if(user !== null) {
+     const passwordMatch = await bcrypt.compare(password, user.hashed_password.toString())
+
+     if(passwordMatch){
+       loginUser(req, res, user)
+       return res.redirect('/')
+     }
+   }
+   errors.push('Login failed for provided credentials.')
+ } else {
+   errors = validatorErrors.array().map((error) => error.msg);
+ }
+ res.render('user-login', {errors, email, csrfToken: req.csrfToken() })
+}))
 
 module.exports = router;
