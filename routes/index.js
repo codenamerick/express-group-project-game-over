@@ -17,6 +17,7 @@ const { asyncHandler, csrfProtection } = require('./utils')
 
 router.get('/', csrfProtection, asyncHandler(async(req, res) => {
 
+// TODO add vote count instead of updatedAt
   const questions = await Question.findAll({
     limit: 15,
     order: [["updatedAt", "DESC"]],
