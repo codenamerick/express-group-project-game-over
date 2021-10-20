@@ -1,9 +1,9 @@
-* {
-  display: grid;
-  grid-auto-flow:
-
-}
+/* header {
+  position: static;
+} */
 
 #questions_page {
-  background-color: red;
+  display: flex-box;
+  text-align: center;
+
 }
