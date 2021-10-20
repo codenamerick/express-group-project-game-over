@@ -3,12 +3,12 @@ extends layout.pug
 include utils.pug
 
 block content
-  div
+  div(id='questions_page')
     h2 Questions
     div
-      form(method='get' action='/questions/ask')
+      form(id='questions_button' method='get' action='/questions/ask')
         button(type='submit' class='default-ask-button') Ask Question
-    ul
+    ul(id='questions_list')
       each question in questions
         li
           a(value=question.id href="/questions/" + question.id)= question.title
