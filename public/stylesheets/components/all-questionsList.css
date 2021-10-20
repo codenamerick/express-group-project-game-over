@@ -7,3 +7,7 @@
   text-align: center;
 
 }
+
+#questions_list > li {
+  list-style-type: none ;
+}
