@@ -1,3 +1,9 @@
+/* --- Home page should be romved below --- */
+
+.home-page-filler {
+    margin: 100px 0 0 42px;
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -34,6 +40,10 @@ header > div {
     max-width: 1240px;
 }
 
+.nav-logo {
+    width: 48px;
+}
+
 .nav-left, .nav-right {
     display: flex;
     align-items: center;
@@ -44,6 +54,7 @@ header > div {
 }
 
 .nav-left ul {
+    align-items: center;
     display: flex;
     list-style: none;
 }
@@ -152,6 +163,8 @@ label {
 .form_container {
     height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     min-height: 600px;
 }

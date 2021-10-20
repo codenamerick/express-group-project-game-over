@@ -2,7 +2,7 @@ doctype html
 html
   head
       block head
-        title="Game Over App!"
+        title="Game Over App | Where gamers win!"
         link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.css" rel="stylesheet")
         link(rel='stylesheet' href='/stylesheets/index.css')
   body
@@ -10,7 +10,9 @@ html
       div
         div.nav-left
           ul
-            li link
+            li
+              a(href="/")
+                img(src="../images/game-over-controller-logo.svg", alt="Game Over logo" class='nav-logo')
             li link
             li link
           form(action="/" method='post').searchForm
