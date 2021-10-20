@@ -2,17 +2,30 @@ doctype html
 html
   head
       block head
-        title="Express Starter App"
-        link(rel='stylesheet' href='/stylesheets/reset.css')
+        title="Game Over App | Where gamers win!"
+        link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.css" rel="stylesheet")
+        link(rel='stylesheet' href='/stylesheets/main-styles.css')
   body
+    div.style-divider
     header
-      nav
-        if locals.authenticated
-          span #{user.first_name} logged in
-          form(action='/users/logout' method='post')
-            button Logout
-        else
-          span
-            a(href='/users/login') Login
-            a(href='/users/sign-up') Sign Up
+      div
+        div.nav-left
+          ul
+            li
+              a(href="/")
+                img(src="../images/game-over-controller-logo.svg", alt="Game Over logo" class='nav-logo')
+          form(action="/" method='post').searchForm
+            input(type="hidden" name="_csrf" value=csrfToken)
+            div
+              input(type='search' placeholder='Search...' name="search" value=search)
+              i(class="fas fa-search")
+        div.nav-right
+          if locals.authenticated
+            span #{user.first_name} logged in
+            form(action='/users/logout' method='post')
+              button(class='main-btn') Logout
+          else
+            span
+              a(href='/users/login' class='main-btn log-in-btn') Log in
+              a(href='/users/sign-up' class='main-btn') Sign up
     block content
