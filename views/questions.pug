@@ -6,7 +6,8 @@ block content
   div
     h2 Questions
     div
-      button(class='default-ask-button') Ask Question
+      form(method='get' action='/questions/ask')
+        button(type='submit' class='default-ask-button') Ask Question
     ul
       each question in questions
         li
