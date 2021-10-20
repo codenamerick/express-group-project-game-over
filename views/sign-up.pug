@@ -2,26 +2,28 @@ extends layout.pug
 include utils.pug
 
 block content
-  +validationErrorSummary(errors)
-  form(action='/users/sign-up' method='post')
-    input(name='_csrf' type='hidden' value=csrfToken)
-    div
-      label(for='first_name') First Name
-      input(name='first_name' type='text' value=user.first_name required)
-    div
-      label(for='last_name') Last Name
-      input(name='last_name' type='text' value=user.last_name required)
-    div
-      label(for='user_name') Username
-      input(name='user_name' type='text' value=user.user_name required)
-    div
-      label(for='email') Email
-      input(name='email' type='email' value=user.email required)
-    div
-      label(for='password') Password
-      input(name='password' type='password' required)
-    div
-      label(for='confirm_password') Confirm Password
-      input(name='confirm_password' type='password' required)
-    div
-      button Sign Up!
+  main.form_container
+    div.userForm
+      +validationErrorSummary(errors)
+      form(action='/users/sign-up' method='post')
+        input(name='_csrf' type='hidden' value=csrfToken)
+        div
+          label(for='first_name') First Name
+          input(name='first_name' type='text' value=user.first_name required)
+        div
+          label(for='last_name') Last Name
+          input(name='last_name' type='text' value=user.last_name required)
+        div
+          label(for='user_name') Username
+          input(name='user_name' type='text' value=user.user_name required)
+        div
+          label(for='email') Email
+          input(name='email' type='email' value=user.email required)
+        div
+          label(for='password') Password
+          input(name='password' type='password' required)
+        div
+          label(for='confirm_password') Confirm Password
+          input(name='confirm_password' type='password' required)
+        div
+          button.main-btn Sign Up!

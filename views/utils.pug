@@ -1,7 +1,7 @@
 mixin validationErrorSummary(errors)
 	if errors
-		div
-			p The following error(s) has occurred:
+		div.form-errors
+			p The following error(s) have occurred:
 			ul
 				each error in errors
 					li= error
