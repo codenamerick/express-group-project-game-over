@@ -8,6 +8,7 @@
 body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     background: #F1F2F3;
+    padding-top: 43px;
 }
 
 a {
@@ -19,7 +20,10 @@ a {
 header {
     background: #F8F9F9;
     box-shadow: 0 10px 25px rgb(0 0 0 / 5%), 0 20px 48px rgb(0 0 0 / 5%), 0 1px 4px rgb(0 0 0 / 10%);
-    padding: 16px;
+    padding: 8px 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
 }
 
 header > div {
@@ -30,9 +34,12 @@ header > div {
     max-width: 1240px;
 }
 
-.nav-left {
+.nav-left, .nav-right {
     display: flex;
     align-items: center;
+}
+
+.nav-left {
     width: 75%;
 }
 
@@ -68,6 +75,7 @@ header > div {
     margin: 0 auto;
     border-radius: 6px;
     box-shadow: 0 10px 25px rgb(0 0 0 / 5%), 0 20px 48px rgb(0 0 0 / 5%), 0 1px 4px rgb(0 0 0 / 10%);
+    width: 100%;
 }
 
 .userForm div {
@@ -126,4 +134,11 @@ label {
 
 .searchForm input {
     width: 100%;
+}
+
+.form_container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    min-height: 600px;
 }
