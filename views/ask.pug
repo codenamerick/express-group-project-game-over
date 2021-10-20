@@ -6,7 +6,7 @@ block content
   div(class='questionContainer')
     form(method='post' action='/questions/ask')
       input(name='_csrf' type='hidden' value=csrfToken)
-      input(name='user_id' value=question.user_id type='hidden')
+      input(name='user_id' type='hidden' value=user.id)
       div
         label(for='title') Title
       div
@@ -17,5 +17,7 @@ block content
         label(for='question') What would you like to know?
       div
         textarea(name='question' placeholder='eg. I can\'t get past the Mother on level 5 of act 2 in Gears of War 5! How do I time shooting her in the back and keeping my distance while she is frozen in the ectoplasmic goo?! ....')
+      div
+
       div
         button Ask Question

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { csrfProtection, asyncHandler } = require('./utils');
 const db = require('../db/models');
-const { Question } = db;
+const { Question, User } = db;
 const { check, validationResult } = require('express-validator');
 const id = db.User.id
 
@@ -33,14 +33,22 @@ router.get(
   })
 );
 
-router.post('/ask', asyncHandler(async(req, res)=> {
+// router.post('/ask', asyncHandler(async(req, res)=> {
+//   const { title, question, user_id } = req.body;
+
+//  const askQuestion = await Question.create({ title, question, user_id})
+
+//   res.redirect('/questions/:id', { askQuestion })
+
+// }))
+
+router.post('/ask', asyncHandler(async(req, res) => {
   const { title, question, user_id } = req.body;
+  const user = User.findOne(id)
+  await Question.create({ title, question, user_id, user});
 
- const askQuestion = await Question.create({ title, question})
-
-  res.redirect('/questions/:id', { askQuestion })
-
-}))
+  res.redirect('/')
+}));
 
 const questionNotFoundError = (id) => {
   const err = Error("Question not found");
