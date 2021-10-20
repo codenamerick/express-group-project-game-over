@@ -4,7 +4,7 @@ const { csrfProtection, asyncHandler } = require('./utils');
 const db = require('../db/models');
 const { Question } = db;
 const { check, validationResult } = require('express-validator');
-
+const id = db.User.id
 
 // TODO: add requiredAuth to access questions text field
 
@@ -17,20 +17,6 @@ router.get('/ask', asyncHandler(async (req, res) => {
   res.render('ask')
 }));
 
-router.get('/:id', asyncHandler(async(req, res) => {
-  const question = await Question.findByPk(id)
-
-  res.render('question-id', { question })
-
-}));
-
-const questionNotFoundError = (id) => {
-  const err = Error("Question not found");
-  err.errors = [`Question with id of ${id} could not be found.`];
-  err.title = "Question not found.";
-  err.status = 404;
-  return err;
-};
 
 
 router.get(
@@ -42,12 +28,29 @@ router.get(
       },
     });
     if (question) {
-      res.json({ question });
-    } else {
-      next(questionNotFoundError(req.params.id));
+      res.render("question-id", { question });
     }
   })
 );
+
+router.post('/ask', asyncHandler(async(req, res)=> {
+  const { title, question } = req.body;
+
+ const askQuestion = await Question.create({ title, question})
+
+  res.redirect('/questions/:id')
+
+}))
+
+const questionNotFoundError = (id) => {
+  const err = Error("Question not found");
+  err.errors = [`Question with id of ${id} could not be found.`];
+  err.title = "Question not found.";
+  err.status = 404;
+  return err;
+};
+
+
 
 
 module.exports = router;
