@@ -17,10 +17,19 @@ router.get('/ask', asyncHandler(async (req, res) => {
   res.render('ask')
 }));
 
+router.post(
+  "/ask",
+  asyncHandler(async (req, res) => {
+    const { title, question, user_id } = req.body;
+    const user = User.findOne(id);
+    await Question.create({ title, question, user_id, user });
 
+    res.redirect("/questions");
+  })
+);
 
 router.get(
-  "/:id",
+  "/:id(\\d+)",
   asyncHandler(async (req, res, next) => {
     const question = await Question.findOne({
       where: {
@@ -33,6 +42,8 @@ router.get(
   })
 );
 
+
+
 // router.post('/ask', asyncHandler(async(req, res)=> {
 //   const { title, question, user_id } = req.body;
 
@@ -42,13 +53,7 @@ router.get(
 
 // }))
 
-router.post('/ask', asyncHandler(async(req, res) => {
-  const { title, question, user_id } = req.body;
-  const user = User.findOne(id)
-  await Question.create({ title, question, user_id, user});
 
-  res.redirect('/')
-}));
 
 const questionNotFoundError = (id) => {
   const err = Error("Question not found");
