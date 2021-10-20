@@ -8,7 +8,6 @@
 body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     background: #F1F2F3;
-    padding-top: 43px;
 }
 
 a {
@@ -29,6 +28,7 @@ header {
 header > div {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin: 0 auto;
     max-width: 1240px;
@@ -67,6 +67,7 @@ header > div {
     color: #fff;
 }
 
+/* --- Log in / Sign up form styling below --- */
 
 .userForm {
     background: white;
@@ -133,7 +134,19 @@ label {
 }
 
 .searchForm input {
+    padding-right: 28px;
     width: 100%;
+}
+
+.searchForm > div {
+    align-items: center;
+    display: flex;
+    position: relative;
+}
+
+.searchForm i {
+    position: absolute;
+    right: 8px;
 }
 
 .form_container {

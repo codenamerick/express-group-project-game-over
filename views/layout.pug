@@ -16,7 +16,7 @@ html
           form(action="/" method='post').searchForm
             input(type="hidden" name="_csrf" value=csrfToken)
             div
-              input(type='text' placeholder='Search...' name="search" value=search)
+              input(type='search' placeholder='Search...' name="search" value=search)
               i(class="fas fa-search")
         div.nav-right
           if locals.authenticated
