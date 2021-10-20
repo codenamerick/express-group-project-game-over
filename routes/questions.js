@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { csrfProtection, asyncHandler } = require('./utils');
 const db = require('../db/models');
-const { Question, User } = db;
+const { Question, User, Answer } = db;
 const { check, validationResult } = require('express-validator');
 const id = db.User.id
 
@@ -13,7 +13,7 @@ router.get('/', asyncHandler(async (req, res) => {
   res.render('questions', { questions });
 }))
 
-router.get('/ask', asyncHandler(async (req, res) => {
+router.get('/ask', requireAuth, asyncHandler(async (req, res) => {
   res.render('ask')
 }));
 
@@ -29,15 +29,17 @@ router.post(
 );
 
 router.get(
-  "/:id(\\d+)",
+  "/:id(\\d+)", csrfProtection,
   asyncHandler(async (req, res, next) => {
     const question = await Question.findOne({
       where: {
         id: req.params.id,
       },
     });
+
     if (question) {
-      res.render("question-id", { question });
+      console.log("We ARE HERE!! ___________________________")
+      res.render("question-id", { question, csrfToken: req.csrfToken() });
     }
   })
 );
@@ -45,14 +47,24 @@ router.get(
 // ANSWERING A QUESTION
 
 //Answers validators
-const answerValidator = [
+const answerValidators = [
   check("answer")
     .exists({ checkFalsy: true })
     .withMessage("Please provide email address.")
 ];
 
-router.post("/:id(\\d+)/answers", requireAuth, asyncHandler((req, res) => {
-  res.render('answers');
+router.post("/:id(\\d+)/answers", requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+
+  const { answer } = req.body;
+  const { user_id } = req.session.auth;
+  const question_id = req.params.id;
+
+
+  // const answer = await Answer.build({
+
+  // })
+  // console.log(req.body);
+  // console.log('---------------------------------');
 }));
 
 

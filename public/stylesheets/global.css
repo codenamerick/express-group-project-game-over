@@ -8,6 +8,7 @@
 body {
    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
    background: #F1F2F3;
+   padding-top: 50px;
 }
 
 a {
@@ -22,8 +23,7 @@ header {
    width: 100%;
    top: 2px;
 
-   /* remove before pushing!! */
-   display: none;
+   /* display: none; */
 }
 
 header > div {
