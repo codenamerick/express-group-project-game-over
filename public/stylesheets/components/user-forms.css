@@ -1,0 +1,55 @@
+.userForm {
+   background: white;
+   padding: 24px;
+   max-width: 300px;
+   margin: 0 auto;
+   border-radius: 6px;
+   box-shadow: 0 10px 25px rgb(0 0 0 / 5%), 0 20px 48px rgb(0 0 0 / 5%), 0 1px 4px rgb(0 0 0 / 10%);
+   width: 100%;
+}
+
+.userForm div {
+   display: flex;
+   flex-direction: column;
+   margin-bottom: 10px;
+   width: 100%;
+}
+
+.userForm form {
+   width: 100%;
+}
+
+label {
+   margin-bottom: 3px;
+}
+
+.userForm input, .main-btn, .searchForm input {
+   padding: 6px 6px;
+   border-radius: 4px;
+}
+
+.userForm input, .searchForm input {
+   border: 1px solid #BABFC4;
+   transition: all 250ms;
+}
+
+.userForm input:focus, .searchForm input:focus {
+   border: 1px solid #2098FB;
+}
+
+.form-errors {
+   color: #DC5057;
+}
+
+.form-errors li {
+   margin: 4px 0 4px 20px;
+}
+
+.form_container {
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   min-height: 600px;
+}
