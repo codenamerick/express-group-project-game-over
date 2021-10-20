@@ -34,11 +34,11 @@ router.get(
 );
 
 router.post('/ask', asyncHandler(async(req, res)=> {
-  const { title, question } = req.body;
+  const { title, question, user_id } = req.body;
 
  const askQuestion = await Question.create({ title, question})
 
-  res.redirect('/questions/:id')
+  res.redirect('/questions/:id', { askQuestion })
 
 }))
 
