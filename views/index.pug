@@ -12,3 +12,8 @@ block content
       div.question-list-header
         h1= "Top Questions"
         a(href="/" class="main-btn") Ask Question
+      div
+        ul
+          each question in questions
+            li
+              a(id='link_questions' value=question.id href="/questions/" + question.id)= question.title

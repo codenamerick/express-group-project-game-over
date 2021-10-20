@@ -150,3 +150,9 @@ header > div {
       margin-top: 8px;
    }
 }
+
+
+/* --- list styling ---*/
+ul{
+   list-style-type: none;
+}

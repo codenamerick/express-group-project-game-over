@@ -6,14 +6,12 @@ block content
   main.question-list-container
     div
       div.question-list-header
-        h1= "All Questions"
-        a(href="/" class="main-btn") Ask Question
-      div(id='questions_page')
-        h2 Questions
-        div
-          form(id='questions_button' method='get' action='/questions/ask')
+        h1= "Questions"
+        form(id='questions_button' method='get' action='/questions/ask')
             button(type='submit' class='default-ask-button') Ask Question
-        ul(id='questions_list')
-          each question in questions
-            li
-              a(value=question.id href="/questions/" + question.id)= question.title
+      div(id='questions_page')
+        div
+          ul(id='questions_list')
+            each question in questions
+              li
+                a(id='link_questions' value=question.id href="/questions/" + question.id)= question.title

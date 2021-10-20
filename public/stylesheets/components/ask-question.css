@@ -1,0 +1,16 @@
+
+
+#ask_label{
+ color: #000000;
+ text-shadow:#dc28f3 .65px .65px ;
+}
+
+button {
+     background: #2098FB;
+   color: white;
+   border: 1px solid #2098FB;
+   transition: all 250ms;
+   margin:4px;
+   padding: 6px 8px;
+   border-radius: 4px;
+}
