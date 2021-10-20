@@ -1,0 +1,17 @@
+.question-list-container {
+   margin: 60px auto;
+   max-width: 1240px;
+   padding: 20px;
+}
+
+.question-list-container > div {
+   border-radius: 4px;
+   padding: 20px;
+   background-color: white;
+}
+
+.question-list-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
