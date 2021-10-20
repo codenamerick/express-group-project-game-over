@@ -40,4 +40,4 @@ const requireAuth = (req, res) => {
   }
 };
 
-module.exports = { loginUser, restoreUser, logoutUser }
+module.exports = { loginUser, restoreUser, logoutUser, requireAuth }

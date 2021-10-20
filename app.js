@@ -10,8 +10,6 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const { sessionSecret } = require('./config');
 const { restoreUser } = require('./auth');
-const { asyncHandler } = require('./routes/utils');
-
 
 const app = express();
 
