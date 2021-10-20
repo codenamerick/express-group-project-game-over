@@ -3,6 +3,7 @@ html
   head
       block head
         title="Game Over App!"
+        link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.css" rel="stylesheet")
         link(rel='stylesheet' href='/stylesheets/index.css')
   body
     header
@@ -14,7 +15,9 @@ html
             li link
           form(action="/" method='post').searchForm
             input(type="hidden" name="_csrf" value=csrfToken)
-            input(type='text' placeholder='Search...' name="search" value=search)
+            div
+              input(type='text' placeholder='Search...' name="search" value=search)
+              i(class="fas fa-search")
         div.nav-right
           if locals.authenticated
             span #{user.first_name} logged in
