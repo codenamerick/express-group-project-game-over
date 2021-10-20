@@ -21,6 +21,9 @@ header {
    position: fixed;
    width: 100%;
    top: 2px;
+
+   /* remove before pushing!! */
+   display: none;
 }
 
 header > div {

@@ -6,11 +6,11 @@ const { Question, User } = db;
 const { check, validationResult } = require('express-validator');
 const id = db.User.id
 
-// TODO: add requiredAuth to access questions text field
+const { requireAuth } = require('../auth');
 
-router.get('/', asyncHandler( async (req, res) => {
+router.get('/', asyncHandler(async (req, res) => {
   const questions = await Question.findAll();
-  res.render('questions', { questions } );
+  res.render('questions', { questions });
 }))
 
 router.get('/ask', asyncHandler(async (req, res) => {
@@ -18,7 +18,7 @@ router.get('/ask', asyncHandler(async (req, res) => {
 }));
 
 router.post(
-  "/ask",
+  "/ask", requireAuth,
   asyncHandler(async (req, res) => {
     const { title, question, user_id } = req.body;
     const user = User.findOne(id);
@@ -41,6 +41,19 @@ router.get(
     }
   })
 );
+
+// ANSWERING A QUESTION
+
+//Answers validators
+const answerValidator = [
+  check("answer")
+    .exists({ checkFalsy: true })
+    .withMessage("Please provide email address.")
+];
+
+router.post("/:id(\\d+)/answers", requireAuth, asyncHandler((req, res) => {
+  res.render('answers');
+}));
 
 
 
