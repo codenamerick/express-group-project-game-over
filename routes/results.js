@@ -22,7 +22,7 @@ router.get(
   asyncHandler(async (req, res) => {
     console.log('we made it into the async function!')
     const { search } = req.query
-     let questions = await Question.findAll({
+    let questions = await Question.findAll({
        where: {
          title: {
            [Op.iLike]: `%${search}%`,

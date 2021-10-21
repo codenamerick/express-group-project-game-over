@@ -3,7 +3,12 @@ extends layout.pug
 include utils.pug
 
 block content
-  h1 Results!
+  main.question-list-container
+    div
+      div.question-list-header
+        h1 Results!
+        form(id='questions_button' method='get' action='/questions/ask')
+            button(type='submit' class='default-ask-button') Ask Question
   div
     ul
       each question in questions
