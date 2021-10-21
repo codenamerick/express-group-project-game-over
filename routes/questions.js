@@ -72,6 +72,14 @@ router.post('/:id(\\d+)/delete', csrfProtection, asyncHandler(async (req, res) =
 }));
 
 
+// EDITING A QUESTION
+
+router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async(req, res) => {
+  const question = await Question.findByPk(req.params.id);
+  res.render('question-edit', {question, csrfToken: req.csrfToken()})
+}))
+
+
 // ANSWERING A QUESTION
 
 //Answers validators

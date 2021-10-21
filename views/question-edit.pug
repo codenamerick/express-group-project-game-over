@@ -1,0 +1,16 @@
+extends layout.pug
+
+include utils.pug
+
+block content
+   main
+      div
+         p= .question
+      div
+         form(action=`/answers/${answer.id}` method='post')
+            input(name='_csrf' type='hidden' value=csrfToken)
+            div
+               label(for="answer" ) Edit answer...
+               textarea(name="answer" value=answer.answer) #{answer.answer}
+            div
+               button.main-btn Save
