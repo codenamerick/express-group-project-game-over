@@ -7,4 +7,5 @@ block content
   div
     ul
       each question in questions
-        li(id='result' value=question.title)= question.title
+        li(id='result')
+          a(id='link_questions' value=question.id href="/questions/" + question.id)= question.title
