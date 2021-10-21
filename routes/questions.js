@@ -59,7 +59,7 @@ router.get(
 
 // Delete question
 
-router.post('/:id(\\d+)/delete', csrfProtection, asyncHandler(async (req, res) => {
+router.post('/:id(\\d+)/delete', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
 
   const questionId = req.params.id;
   const removedQuestion = await Question.findByPk(questionId, {
@@ -74,9 +74,15 @@ router.post('/:id(\\d+)/delete', csrfProtection, asyncHandler(async (req, res) =
 
 // EDITING A QUESTION
 
-router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async(req, res) => {
+// getting question edit page
+router.get('/:id(\\d+)/edit', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
   const question = await Question.findByPk(req.params.id);
-  res.render('question-edit', {question, csrfToken: req.csrfToken()})
+  res.render('question-edit', { question, csrfToken: req.csrfToken() })
+}))
+
+// submitting an edited question
+router.post('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+
 }))
 
 
@@ -112,7 +118,7 @@ router.post(
 
 // Dynamically deleting an answer
 
-router.delete('/:id(\\d+)/answers/:answerId(\\d+)', asyncHandler(async (req, res) => {
+router.delete('/:id(\\d+)/answers/:answerId(\\d+)', requireAuth, asyncHandler(async (req, res) => {
 
   const answerId = req.params.answerId;
   const removedAnswer = await Answer.findByPk(answerId);
