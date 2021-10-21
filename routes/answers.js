@@ -1,15 +1,22 @@
-// const express = require('express');
-// const router = express.Router();
-// const { asyncHandler, csrfProtection } = require('./utils');
+const express = require('express');
+const router = express.Router();
+const { asyncHandler, csrfProtection } = require('./utils');
+const db = require('../db/models');
+const { Answer, Question } = db;
 
-// // Deleting an answer
 
-// router.post('/:id(\\d+)/delete', csrfProtection, asyncHandler(async (req, res) => {
-//     console.log('-----------------');
-//     console.log(req.params);
-//     console.log('-----------------');
-//     const answerId = req.params.id;
-//     res.render('question-id');
-// }))
+// EDITING AN ANSWER
 
-// module.exports = router;
+// getting answer edit page
+router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => {
+   const answer = await Answer.findByPk(req.params.id, {
+      include: Question
+   })
+   res.render('answer-edit', { csrfToken: req.csrfToken(), answer })
+}))
+
+//submitting an edited answer
+
+
+
+module.exports = router;
