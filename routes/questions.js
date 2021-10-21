@@ -88,9 +88,6 @@ router.post(
 router.delete('/:id(\\d+)/answers/:answerId(\\d+)', asyncHandler(async (req, res) => {
 
   const answerId = req.params.answerId;
-
-  console.log(answerId);
-
   const removedAnswer = await Answer.findByPk(answerId);
 
   if (removedAnswer) {

@@ -10,8 +10,6 @@ window.addEventListener("load", (event) => {
       const answerId = e.target.id.split("-")[4];
       const questionId = e.target.id.split("-")[1];
 
-      console.log("HERE!!!!!!!!!");
-
       const res = await fetch(
         `/questions/${questionId}/answers/${answerId}`,
         {
@@ -20,7 +18,6 @@ window.addEventListener("load", (event) => {
       );
 
       const data = await res.json();
-
       if (data.message === "Success") {
         const container = document.querySelector(`#answer-${answerId}-container`)
         container.remove();
