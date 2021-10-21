@@ -69,7 +69,7 @@ router.post(
   asyncHandler(async (req, res) => {
     const { answer } = req.body;
     const { user_id } = req.session.auth;
-    const question_id = parseInt(req.params.id, 10);
+    const question_id = req.params.id;
 
     // implement answer validators
 
@@ -79,7 +79,7 @@ router.post(
       question_id,
     });
 
-    res.redirect(`/questions/${question_id}`, {
+    res.redirect(`/questions/${req.params.id}`, {
       newAnswer,
       csrfToken: req.csrfToken(),
     });
