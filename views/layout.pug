@@ -8,6 +8,7 @@ html
         link(rel="preconnect" href="https://fonts.googleapis.com")
         link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
         link(href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet")
+        script(src="/javascripts/index.js" type="module" defer)
   body
     div.style-divider
     header
@@ -16,7 +17,11 @@ html
           ul
             li
               a(href="/")
-                img(src="../images/game-over-controller-logo.svg", alt="Game Over logo" class='nav-logo')
+                img(src="/images/game-over-controller-logo.svg", alt="Game Over logo" class='nav-logo')
+            li
+              a(href="/") Home
+            li
+              a(href="/questions") Questions
           form(action="/" method='post').searchForm
             input(type="hidden" name="_csrf" value=csrfToken)
             div

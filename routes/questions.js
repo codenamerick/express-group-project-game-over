@@ -1,24 +1,32 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { csrfProtection, asyncHandler } = require('./utils');
-const db = require('../db/models');
-const { Question, User } = db;
-const { check, validationResult } = require('express-validator');
-const id = db.User.id
+const { csrfProtection, asyncHandler } = require("./utils");
+const db = require("../db/models");
+const { Question, User, Answer } = db;
+const { check, validationResult } = require("express-validator");
+const id = db.User.id;
 
-// TODO: add requiredAuth to access questions text field
+const { requireAuth } = require("../auth");
 
-router.get('/', asyncHandler( async (req, res) => {
-  const questions = await Question.findAll();
-  res.render('questions', { questions } );
-}))
+router.get(
+  "/",
+  asyncHandler(async (req, res) => {
+    const questions = await Question.findAll();
+    res.render("questions", { questions });
+  })
+);
 
-router.get('/ask', asyncHandler(async (req, res) => {
-  res.render('ask')
-}));
+router.get(
+  "/ask",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    res.render("ask");
+  })
+);
 
 router.post(
   "/ask",
+  requireAuth,
   asyncHandler(async (req, res) => {
     const { title, question, user_id } = req.body;
     const user = User.findOne(id);
@@ -30,30 +38,72 @@ router.post(
 
 router.get(
   "/:id(\\d+)",
+  csrfProtection,
   asyncHandler(async (req, res, next) => {
-    const question = await Question.findOne({
-      where: {
-        id: req.params.id,
-      },
-    });
+    const question = await Question.findByPk(req.params.id,
+      {
+        include: Answer,
+      }
+    );
+
     if (question) {
-      res.render("question-id", { question });
+      if (req.session.auth) {
+        const sessionUserId = req.session.auth.user_id;
+        res.render("question-id", { question, sessionUserId, csrfToken: req.csrfToken() });
+      } else {
+        res.render("question-id", { question, csrfToken: req.csrfToken() });
+      }
     }
   })
 );
 
+// ANSWERING A QUESTION
 
+//Answers validators
+const answerValidators = [
+  check("answer")
+    .exists({ checkFalsy: true })
+    .withMessage("Please provide email address."),
+];
 
-// router.post('/ask', asyncHandler(async(req, res)=> {
-//   const { title, question, user_id } = req.body;
+router.post(
+  "/:id(\\d+)/answers",
+  requireAuth,
+  csrfProtection,
+  asyncHandler(async (req, res) => {
+    const { answer } = req.body;
+    const { user_id } = req.session.auth;
+    const question_id = req.params.id;
 
-//  const askQuestion = await Question.create({ title, question, user_id})
+    // implement answer validators
 
-//   res.redirect('/questions/:id', { askQuestion })
+    await Answer.create({
+      answer,
+      user_id,
+      question_id,
+    });
 
-// }))
+    res.redirect(`/questions/${req.params.id}`);
+  })
+);
 
+// Dynamically deleting an answer
 
+router.delete('/:id(\\d+)/answers/:answerId(\\d+)', asyncHandler(async (req, res) => {
+
+  const answerId = req.params.answerId;
+  const removedAnswer = await Answer.findByPk(answerId);
+
+  if (removedAnswer) {
+    await removedAnswer.destroy();
+    res.json({ message: "Success" });
+  } else {
+    res.json({ message: "Failure" })
+  }
+
+}));
+
+// --- What is this for??? (below) ---
 
 const questionNotFoundError = (id) => {
   const err = Error("Question not found");
@@ -62,8 +112,5 @@ const questionNotFoundError = (id) => {
   err.status = 404;
   return err;
 };
-
-
-
 
 module.exports = router;

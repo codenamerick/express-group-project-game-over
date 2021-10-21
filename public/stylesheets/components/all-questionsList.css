@@ -2,6 +2,11 @@
   position: static;
 } */
 
+<<<<<<< HEAD
+.filler {
+   margin-top: 120px;
+   padding: 20px;
+=======
 #questions_page {
   display: flex-box;
   text-align: center;
@@ -46,4 +51,5 @@ a#link_questions:visited:hover{
    margin:4px;
    padding: 6px 8px;
    border-radius: 4px;
+>>>>>>> main
 }
