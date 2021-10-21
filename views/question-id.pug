@@ -8,6 +8,9 @@ block content
     div
       p= question.question
     div
+      each answer in question.Answers
+        p= answer.answer
+    div
       form(action=`/questions/${question.id}/answers` method='post')
         input(name='_csrf' type='hidden' value=csrfToken)
         div

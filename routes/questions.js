@@ -47,7 +47,6 @@ router.get(
     );
 
     if (question) {
-      console.log(question, "___________________________");
       res.render("question-id", { question, csrfToken: req.csrfToken() });
     }
   })
@@ -73,16 +72,13 @@ router.post(
 
     // implement answer validators
 
-    const newAnswer = await Answer.create({
+    await Answer.create({
       answer,
       user_id,
       question_id,
     });
 
-    res.redirect(`/questions/${req.params.id}`, {
-      newAnswer,
-      csrfToken: req.csrfToken(),
-    });
+    res.redirect(`/questions/${req.params.id}`);
   })
 );
 
