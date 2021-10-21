@@ -47,8 +47,12 @@ router.get(
     );
 
     if (question) {
-      const sessionUserId = req.session.auth.user_id;
-      res.render("question-id", { question, sessionUserId, csrfToken: req.csrfToken() });
+      if (req.session.auth) {
+        const sessionUserId = req.session.auth.user_id;
+        res.render("question-id", { question, sessionUserId, csrfToken: req.csrfToken() });
+      } else {
+        res.render("question-id", { question, csrfToken: req.csrfToken() });
+      }
     }
   })
 );
