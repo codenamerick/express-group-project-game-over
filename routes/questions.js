@@ -47,7 +47,8 @@ router.get(
     );
 
     if (question) {
-      res.render("question-id", { question, csrfToken: req.csrfToken() });
+      const sessionUserId = req.session.auth.user_id;
+      res.render("question-id", { question, sessionUserId, csrfToken: req.csrfToken() });
     }
   })
 );

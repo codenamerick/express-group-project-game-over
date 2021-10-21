@@ -10,6 +10,9 @@ block content
     div
       each answer in question.Answers
         p= answer.answer
+        if answer.user_id === sessionUserId
+          a(href='' class='main-btn') Edit
+          a(href=`/answers/${answer.id}` class='main-btn') Delete
     div
       form(action=`/questions/${question.id}/answers` method='post')
         input(name='_csrf' type='hidden' value=csrfToken)
@@ -17,4 +20,4 @@ block content
           label(for="answer" )
           textarea(name="answer")
         div
-          button.test-btn Answer
+          button.main-btn Answer
