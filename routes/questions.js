@@ -28,6 +28,15 @@ router.post(
   })
 );
 
+
+const questionNotFoundError = (id) => {
+  const err = Error("Question not found");
+  err.errors = [`Question with id of ${id} could not be found.`];
+  err.title = "Question not found.";
+  err.status = 404;
+  return err;
+};
+
 router.get(
   "/:id(\\d+)",
   asyncHandler(async (req, res, next) => {
@@ -38,30 +47,11 @@ router.get(
     });
     if (question) {
       res.render("question-id", { question });
+    } else {
+      next(questionNotFoundError(id));
     }
   })
 );
-
-
-
-// router.post('/ask', asyncHandler(async(req, res)=> {
-//   const { title, question, user_id } = req.body;
-
-//  const askQuestion = await Question.create({ title, question, user_id})
-
-//   res.redirect('/questions/:id', { askQuestion })
-
-// }))
-
-
-
-const questionNotFoundError = (id) => {
-  const err = Error("Question not found");
-  err.errors = [`Question with id of ${id} could not be found.`];
-  err.title = "Question not found.";
-  err.status = 404;
-  return err;
-};
 
 
 
