@@ -23,7 +23,7 @@ router.post('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => {
    const questionId = answer.Question.id;
 
    answer.answer = req.body.answer;
-   answer.save();
+   await answer.save();
 
    res.redirect(`/questions/${questionId}`);
 }))

@@ -62,12 +62,15 @@ router.get(
 router.post('/:id(\\d+)/delete', csrfProtection, asyncHandler(async (req, res) => {
 
   const questionId = req.params.id;
-  const removedQuestion = await Question.findByPk(questionId);
+  const removedQuestion = await Question.findByPk(questionId, {
+    include: Answer
+  });
 
-  removedQuestion.destroy();
+  await removedQuestion.destroy();
 
   res.redirect('/questions');
 }));
+
 
 // ANSWERING A QUESTION
 
