@@ -57,6 +57,43 @@ router.get(
   })
 );
 
+// Delete question
+
+router.post('/:id(\\d+)/delete', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+
+  const questionId = req.params.id;
+  const removedQuestion = await Question.findByPk(questionId, {
+    include: Answer
+  });
+
+  await removedQuestion.destroy();
+
+  res.redirect('/questions');
+}));
+
+
+// EDITING A QUESTION
+
+// getting question edit page
+router.get('/:id(\\d+)/edit', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+  const question = await Question.findByPk(req.params.id);
+  res.render('question-edit', { question, csrfToken: req.csrfToken() })
+}))
+
+// submitting an edited question
+router.post('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+  const { question } = req.body;
+  const editedQuestion = await Question.findByPk(req.params.id)
+
+  if (question) {
+    editedQuestion.question = question;
+    await editedQuestion.save();
+    res.redirect(`/questions/${editedQuestion.id}`);
+  }
+
+}))
+
+
 // ANSWERING A QUESTION
 
 //Answers validators
@@ -89,7 +126,7 @@ router.post(
 
 // Dynamically deleting an answer
 
-router.delete('/:id(\\d+)/answers/:answerId(\\d+)', asyncHandler(async (req, res) => {
+router.delete('/:id(\\d+)/answers/:answerId(\\d+)', requireAuth, asyncHandler(async (req, res) => {
 
   const answerId = req.params.answerId;
   const removedAnswer = await Answer.findByPk(answerId);
