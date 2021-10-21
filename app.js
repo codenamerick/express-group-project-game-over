@@ -11,8 +11,6 @@ const usersRouter = require('./routes/users');
 const questionsRouter = require('./routes/questions.js');
 const { sessionSecret } = require('./config');
 const { restoreUser } = require('./auth');
-const { asyncHandler } = require('./routes/utils');
-
 
 const app = express();
 
