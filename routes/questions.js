@@ -85,16 +85,19 @@ router.post(
 
 // Dynamically deleting an answer
 
-router.delete('/:id(\\d+)/answers/:answerId(\\d+)', csrfProtection, asyncHandler(async (req, res) => {
-  console.log('-----------------------------')
-  console.log(req.body);
-  console.log('-----------------------------')
+router.delete('/:id(\\d+)/answers/:answerId(\\d+)', asyncHandler(async (req, res) => {
+
   const answerId = req.params.answerId;
+
+  console.log(answerId);
+
   const removedAnswer = await Answer.findByPk(answerId);
 
   if (removedAnswer) {
     await removedAnswer.destroy();
     res.json({ message: "Success" });
+  } else {
+    res.json({ message: "Failure" })
   }
 
 }));

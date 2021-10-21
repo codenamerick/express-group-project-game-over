@@ -9,13 +9,14 @@ block content
       p= question.question
     div
       each answer in question.Answers
-        p= answer.answer
-        if answer.user_id === sessionUserId
-          //- a(href=`/answers/${answer.id}` class='main-btn') Edit
-          //- a(href=`/answers/${answer.id}` class='main-btn') Delete
-          form(action=`/questions/${question.id}/answers/${answer.id}` method='delete')
-            input(type="hidden" name='_csrf' value=csrfToken)
-            button(class='delete-btn' id=`question-${question.id}-delete-answer-${answer.id}`) Delete
+        div(class='answer-container' id=`answer-${answer.id}-container`)
+          p= answer.answer
+          if answer.user_id === sessionUserId
+            //- a(href=`/answers/${answer.id}` class='main-btn') Edit
+            //- a(href=`/answers/${answer.id}` class='main-btn') Delete
+            form(action=`/questions/${question.id}/answers/${answer.id}` method='delete')
+              input(type="hidden" name='_csrf' value=csrfToken)
+              button(class='delete-btn' id=`question-${question.id}-delete-answer-${answer.id}`) Delete
     div
       form(action=`/questions/${question.id}/answers` method='post')
         input(name='_csrf' type='hidden' value=csrfToken)
