@@ -167,5 +167,14 @@ router.post('/logout', (req, res) => {
   res.redirect('/');
 })
 
+//DEMO LOGIN ROUTES
+
+router.get('/login-demo', csrfProtection, asyncHandler( async (req, res) => {
+  let demoUser = await User.findByPk(1);
+  console.log(demoUser)
+
+  loginUser(req, res, demoUser);
+  res.redirect('/');
+}))
 
 module.exports = router;
