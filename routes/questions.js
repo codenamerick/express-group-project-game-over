@@ -82,14 +82,7 @@ router.post(
   })
 );
 
-// router.post('/ask', asyncHandler(async(req, res)=> {
-//   const { title, question, user_id } = req.body;
-
-//  const askQuestion = await Question.create({ title, question, user_id})
-
-//   res.redirect('/questions/:id', { askQuestion })
-
-// }))
+// --- What is this for??? (below) ---
 
 const questionNotFoundError = (id) => {
   const err = Error("Question not found");
