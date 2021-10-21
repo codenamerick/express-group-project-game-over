@@ -82,6 +82,14 @@ router.get('/:id(\\d+)/edit', requireAuth, csrfProtection, asyncHandler(async (r
 
 // submitting an edited question
 router.post('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+  const { question } = req.body;
+  const editedQuestion = await Question.findByPk(req.params.id)
+
+  if (question) {
+    editedQuestion.question = question;
+    await editedQuestion.save();
+    res.redirect(`/questions/${editedQuestion.id}`);
+  }
 
 }))
 

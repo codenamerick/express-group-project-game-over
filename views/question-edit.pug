@@ -5,12 +5,9 @@ include utils.pug
 block content
    main
       div.questionContainer
+         h3= question.title
          form(action=`/questions/${question.id}` method='post')
             input(name='_csrf' type='hidden' value=csrfToken)
-            div
-               label(for="title" ) Title
-            div
-               input(type='text' name='title' value=question.title)
             div
                label(for='question' id='ask_label') Question Content
             div
