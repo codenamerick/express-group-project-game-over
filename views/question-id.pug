@@ -3,14 +3,14 @@ extends layout.pug
 include utils.pug
 
 block content
-  div
+  div(class='question-container' id=`question-${questionId}-container`)
     h2= question.title
     div
       p= question.question
     div
       if question.user_id === sessionUserId
             a(href=`/questions/${question.id}/edit` class='main-btn') Edit
-            form(action=`/questions/${question.id}` method='delete')
+            form(action=`/questions/${question.id}/delete` method='post')
               input(type="hidden" name='_csrf' value=csrfToken)
               button(class='question-delete-btn' id=`delete-question-${question.id}`) Delete
     div

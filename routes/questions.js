@@ -57,6 +57,18 @@ router.get(
   })
 );
 
+// Delete question
+
+router.post('/:id(\\d+)/delete', csrfProtection, asyncHandler(async (req, res) => {
+
+  const questionId = req.params.id;
+  const removedQuestion = await Question.findByPk(questionId);
+
+  removedQuestion.destroy();
+
+  res.redirect('/questions');
+}));
+
 // ANSWERING A QUESTION
 
 //Answers validators
