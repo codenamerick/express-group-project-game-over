@@ -1,1 +1,49 @@
+/* header {
+  position: static;
+} */
 
+#questions_page {
+  display: flex-box;
+  text-align: center;
+
+}
+
+#questions_list > li {
+  list-style-type: none ;
+}
+h1{
+  color:#dc28f3;
+  font-size: 34px;
+  text-shadow: #444444 2px 2px;
+
+}
+
+
+a#link_questions{
+  color: #333333;
+  transition: all 250ms;
+}
+
+a#link_questions:hover{
+  color: #dc28f3;
+  font-size: 24px;
+}
+
+a#link_questions:visited{
+  color: #2098FB
+}
+
+a#link_questions:visited:hover{
+  color: #dc28f3;
+  font-size: 24px;
+}
+
+.default-ask-button {
+   background: #2098FB;
+   color: white;
+   border: 1px solid #2098FB;
+   transition: all 250ms;
+   margin:4px;
+   padding: 6px 8px;
+   border-radius: 4px;
+}

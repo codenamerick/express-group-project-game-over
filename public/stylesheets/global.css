@@ -6,7 +6,7 @@
 }
 
 body {
-   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+   font-family: 'Abel', sans-serif;
    background: #F1F2F3;
 }
 
@@ -149,4 +149,10 @@ header > div {
       margin-bottom: 10px;
       margin-top: 8px;
    }
+}
+
+
+/* --- list styling ---*/
+ul{
+   list-style-type: none;
 }
