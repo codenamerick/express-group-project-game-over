@@ -1,9 +1,9 @@
 window.addEventListener("load", (event) => {
   console.log("hello from javascript!");
 
-  const deleteBtns = document.querySelectorAll(".delete-btn");
+  const deleteAnswerBtn = document.querySelectorAll(".answer-delete-btn");
 
-  deleteBtns.forEach((btn) => {
+  deleteAnswerBtn.forEach((btn) => {
     btn.addEventListener("click", async (e) => {
       e.preventDefault();
 
