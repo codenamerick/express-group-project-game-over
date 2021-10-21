@@ -83,6 +83,22 @@ router.post(
   })
 );
 
+// Dynamically deleting an answer
+
+router.delete('/:id(\\d+)/answers/:answerId(\\d+)', csrfProtection, asyncHandler(async (req, res) => {
+  console.log('-----------------------------')
+  console.log(req.body);
+  console.log('-----------------------------')
+  const answerId = req.params.answerId;
+  const removedAnswer = await Answer.findByPk(answerId);
+
+  if (removedAnswer) {
+    await removedAnswer.destroy();
+    res.json({ message: "Success" });
+  }
+
+}));
+
 // --- What is this for??? (below) ---
 
 const questionNotFoundError = (id) => {
