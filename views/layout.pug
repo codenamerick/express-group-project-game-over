@@ -17,11 +17,12 @@ html
             li
               a(href="/")
                 img(src="../images/game-over-controller-logo.svg", alt="Game Over logo" class='nav-logo')
-          form(action="/" method='get').searchForm
+          form(action="/results" method='get').searchForm
             input(type="hidden" name="_csrf" value=csrfToken)
             div
               input(type='search' placeholder='Search...' name="search" value=search)
-              i(class="fas fa-search")
+
+
         div.nav-right
           if locals.authenticated
             span #{user.first_name} logged in

@@ -25,24 +25,6 @@ router.get('/', csrfProtection, asyncHandler(async(req, res) => {
   res.render('index', { questions })
 }));
 
-async function searchQuestions(question) {
-  return await Question.findAll({
-    where: {
-      title: {
-        [Op.like]: `%${question}%`
-      }
-    }
-  });
-}
 
-router.get('/', csrfProtection, asyncHandler( async (req, res) => {
-  let questions = await Question.searchQuestions(`%${req.query.term}`);
-
-  res.render('index', {
-    listTitle: 'Search Results',
-    error,
-    questions
-  });
-}));
 
 module.exports = router;
