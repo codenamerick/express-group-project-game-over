@@ -3,12 +3,6 @@ extends layout.pug
 include utils.pug
 
 block content
-   br
-   br
-   br
-   br
-   br
-   br
    main
       div
          p= answer.Question.question
@@ -17,6 +11,6 @@ block content
             input(name='_csrf' type='hidden' value=csrfToken)
             div
                label(for="answer" ) Edit answer...
-               textarea(name="answer") #{answer.answer}
+               textarea(name="answer" value=answer.answer) #{answer.answer}
             div
                button.main-btn Save

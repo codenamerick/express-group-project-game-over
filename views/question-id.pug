@@ -12,7 +12,7 @@ block content
         div(class='answer-container' id=`answer-${answer.id}-container`)
           p= answer.answer
           if answer.user_id === sessionUserId
-            a(href=`/answers/${answer.id}` class='main-btn') Edit
+            a(href=`/answers/${answer.id}/edit` class='main-btn') Edit
             form(action=`/questions/${question.id}/answers/${answer.id}` method='delete')
               input(type="hidden" name='_csrf' value=csrfToken)
               button(class='delete-btn' id=`question-${question.id}-delete-answer-${answer.id}`) Delete
