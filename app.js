@@ -8,11 +8,13 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const resultsRouter = require('./routes/results');
 const questionsRouter = require('./routes/questions.js');
 const answersRouter = require('./routes/answers');
 const votesRouter = require('./routes/votes');
 const { sessionSecret } = require('./config');
 const { restoreUser } = require('./auth');
+
 
 const app = express();
 
@@ -43,6 +45,7 @@ app.use(restoreUser)
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/questions', questionsRouter);
+app.use('/results', resultsRouter);
 app.use('/answers', answersRouter);
 app.use('/votes', votesRouter);
 

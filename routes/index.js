@@ -25,4 +25,6 @@ router.get('/', csrfProtection, asyncHandler(async(req, res) => {
   res.render('index', { questions })
 }));
 
+
+
 module.exports = router;

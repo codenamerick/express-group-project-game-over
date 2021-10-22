@@ -17,16 +17,17 @@ html
           ul
             li
               a(href="/")
-                img(src="/images/game-over-controller-logo.svg", alt="Game Over logo" class='nav-logo')
+                img(src="../images/game-over-controller-logo.svg", alt="Game Over logo" class='nav-logo')
             li
               a(href="/") Home
             li
               a(href="/questions") Questions
-          form(action="/" method='post').searchForm
+          form(action="/results" method='get').searchForm
             input(type="hidden" name="_csrf" value=csrfToken)
             div
               input(type='search' placeholder='Search...' name="search" value=search)
-              i(class="fas fa-search")
+
+
         div.nav-right
           if locals.authenticated
             span #{user.first_name} logged in
@@ -34,6 +35,8 @@ html
               button(class='main-btn') Logout
           else
             span
+              form(action='/users/demo_user')
+                button(type='submit' class='main-btn') Demo Log in
               a(href='/users/login' class='main-btn log-in-btn') Log in
               a(href='/users/sign-up' class='main-btn') Sign up
     block content

@@ -8,13 +8,13 @@ const id = db.User.id;
 
 const { requireAuth } = require("../auth");
 
-router.get(
-  "/",
-  asyncHandler(async (req, res) => {
-    const questions = await Question.findAll();
-    res.render("questions", { questions });
-  })
-);
+router.get('/', asyncHandler( async (req, res) => {
+  const questions = await Question.findAll({
+    limit: 15,
+    order: [['createdAt', 'DESC']]
+  });
+  res.render('questions', { questions } );
+}))
 
 router.get(
   "/ask",
@@ -35,6 +35,7 @@ router.post(
     res.redirect("/questions");
   })
 );
+
 
 router.get(
   "/:id(\\d+)",
@@ -144,12 +145,12 @@ router.delete('/:id(\\d+)/answers/:answerId(\\d+)', requireAuth, asyncHandler(as
 
 // --- What is this for??? (below) ---
 
-const questionNotFoundError = (id) => {
-  const err = Error("Question not found");
-  err.errors = [`Question with id of ${id} could not be found.`];
-  err.title = "Question not found.";
-  err.status = 404;
-  return err;
-};
+// const questionNotFoundError = (id) => {
+//   const err = Error("Question not found");
+//   err.errors = [`Question with id of ${id} could not be found.`];
+//   err.title = "Question not found.";
+//   err.status = 404;
+//   return err;
+// };
 
 module.exports = router;
