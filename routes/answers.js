@@ -36,7 +36,7 @@ router.post('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, 
 router.get('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
 
    // getting all upvotes for given answer
-   const upVotes = await Vote.findAll({
+   const { count: upVotes } = await Vote.findAndCountAll({
       where: {
          [Op.and]: [
             { answer_id: req.params.id },
@@ -46,7 +46,7 @@ router.get('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
    });
 
    // getting all downvotes for given answer
-   const downVotes = await Vote.findAll({
+   const { count: downVotes } = await Vote.findAndCountAll({
       where: {
          [Op.and]: [
             { answer_id: req.params.id },
@@ -54,6 +54,9 @@ router.get('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
          ]
       }
    });
+
+   const voteScore = upVotes - downVotes;
+   console.log(voteScore);
 }));
 
 router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
@@ -72,13 +75,13 @@ router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
          }
       })
 
-      if (!vote) {
+      // if (!vote) {
          return await Vote.create({
             answer_id: answer.id,
             user_id: userId,
             up_vote
          });
-      }
+      // }
 
       // TODO: implement user voting changing
       // if (vote.up_vote ) {
@@ -88,6 +91,7 @@ router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
    }
 
 }))
+
 
 
 module.exports = router;

@@ -8,10 +8,10 @@ window.addEventListener('load', async (e) => {
         const answerId = ansContainer.id.split('-')[1]
 
         //query db for upvotes
-        const score = await fetch('/votes', {
+        const score = await fetch(`/answers/${answerId}/votes`, {
             method: "GET",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ answer_id: answerId })
+            // headers: { "Content-Type": "application/json" },
+            // body: JSON.stringify({ answer_id: answerId })
         })
 
         //query db for downvotes
