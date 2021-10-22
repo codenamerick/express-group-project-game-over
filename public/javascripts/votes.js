@@ -1,5 +1,8 @@
-const db = require('../../db/models');
-const { Vote, Answer } = db;
+
+window.addEventListener('load', async (e) => {
+    console.log('Hello from votes.js JS!!!!')
+});
+
 
 window.addEventListener("DOMContentLoaded", (e) => {
 

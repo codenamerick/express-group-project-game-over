@@ -1,5 +1,9 @@
 extends layout.pug
 
+append head
+  //- add page specific js
+  script(src="/javascripts/votes.js" type="module" defer)
+
 include utils.pug
 
 block content

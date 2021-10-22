@@ -1,5 +1,5 @@
 window.addEventListener("load", (event) => {
-  console.log("hello from javascript!");
+  console.log("hello from index.js javascript!");
 
   // Question delete func below
 
@@ -7,7 +7,7 @@ window.addEventListener("load", (event) => {
   deleteQuestionBtn.forEach((btn) => {
     btn.addEventListener("click", async (e) => {
       const questionId = e.target.id.split("-")[2];
-      
+
       const res = await fetch(
         `/questions/${questionId}`,
         {
