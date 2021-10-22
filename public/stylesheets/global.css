@@ -121,9 +121,10 @@ header > div {
    cursor: pointer;
 }
 
-button{
-   padding: 
+.vote-btn {
+   background: lightgray;
 }
+
 
 /* --- media queries below --- */
 

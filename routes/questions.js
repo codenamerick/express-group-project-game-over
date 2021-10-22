@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { csrfProtection, asyncHandler } = require("./utils");
 const db = require("../db/models");
-const { Question, User, Answer } = db;
+const { Question, User, Answer, Vote } = db;
 const { check, validationResult } = require("express-validator");
 const id = db.User.id;
 
@@ -41,19 +41,38 @@ router.get(
   "/:id(\\d+)",
   csrfProtection,
   asyncHandler(async (req, res, next) => {
-    const question = await Question.findByPk(req.params.id,
-      {
-        include: Answer,
+    const question = await Question.findByPk(req.params.id, {
+      include: {
+        model: Answer,
+        include: Vote
       }
-    );
+    })
+
+    // const answers = question.Answers;
+    // console.log(`-----------------`)
+    // console.log(question.Answers[0].Votes)
+    // console.log(`------------------`)
+  let voteScore = 0;
+
+  if(question.Answers.length) {
+    const votes = question.Answers[0].Votes;
+
+    votes.forEach((vote) => {
+
+      if (vote.up_vote) {
+        voteScore += 1;
+      } else {
+        voteScore -= 1;
+      }
+    });
+  }
 
     if (question) {
+      let sessionUserId;
       if (req.session.auth) {
-        const sessionUserId = req.session.auth.user_id;
-        res.render("question-id", { question, sessionUserId, csrfToken: req.csrfToken() });
-      } else {
-        res.render("question-id", { question, csrfToken: req.csrfToken() });
+        sessionUserId = req.session.auth.user_id;
       }
+      res.render("question-id", { question, sessionUserId, voteScore, csrfToken: req.csrfToken() });
     }
   })
 );
