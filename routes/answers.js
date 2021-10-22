@@ -64,16 +64,16 @@ router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
    const answer = await Answer.findByPk(req.params.id);
    const userId = req.session.auth.user_id;
 
-   if (answer) {
+   const { up_vote } = req.body
+
+   if (answer && userId) {
       const newVote = await Vote.build({
          answer_id: answer.id,
          user_id: userId,
-         up_vote: false
+         up_vote
       });
 
-      console.log('-----------------');
-      console.log(upVotes, downVotes)
-      console.log('-----------------');
+      await newVote.save();
    }
 
 }))
