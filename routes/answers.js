@@ -67,16 +67,38 @@ router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
    const { up_vote } = req.body
 
    if (answer && userId) {
-      const newVote = await Vote.build({
-         answer_id: answer.id,
-         user_id: userId,
-         up_vote
-      });
+      const vote = await Vote.findOne({
+         where: {
+            [Op.and]: [
+               { answer_id: answer.id },
+               { user_id: userId }
+            ]
+         }
+      })
 
-      await newVote.save();
+      if (!vote) {
+         return await Vote.create({
+            answer_id: answer.id,
+            user_id: userId,
+            up_vote
+         });
+      }
+
+      // if (vote.up_vote )
+
    }
 
 }))
 
 
 module.exports = router;
+
+
+/*
+
+     // console.log('----------------');
+      // console.log(vote);
+      // console.log('----------------');
+
+
+*/
