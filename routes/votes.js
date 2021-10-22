@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const { asyncHandler } = require('./utils');
+const { Vote, Answer } = require('../db/models');
+const { requireAuth } = require("../auth");
 
-const { Vote } = require('../db/models');
-
-router.get('/', asyncHandler(async(req, res) => {
-   res.send('you made it into the votes router!!!')
+router.get('/', asyncHandler(async (req, res) => {
+   res.send('you made it to the Vote route handler!')
 }))
 
 
