@@ -23,7 +23,7 @@ block content
           p= answer.answer
           div
             button(href=`/answers/${answer.id}/votes` class='vote-btn up-vote-btn' id=`upvote-answer-${answer.id}`) Up vote
-            //- p=voteScore
+            p= voteScore
             button(href=`/answers/${answer.id}/votes` class='vote-btn down-vote-btn' id=`downvote-answer-${answer.id}`) Down vote
           if answer.user_id === sessionUserId
             a(href=`/answers/${answer.id}/edit` class='main-btn') Edit

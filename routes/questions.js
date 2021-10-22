@@ -49,13 +49,29 @@ router.get(
     })
 
     // const answers = question.Answers;
+    // console.log(`-----------------`)
+    // console.log(question.Answers[0].Votes)
+    // console.log(`------------------`)
+
+    const votes = question.Answers[0].Votes;
+
+    let voteScore = 0;
+
+    votes.forEach((vote) => {
+
+      if (vote.up_vote) {
+        voteScore += 1;
+      } else {
+        voteScore -= 1;
+      }
+    });
 
     if (question) {
       let sessionUserId;
       if (req.session.auth) {
         sessionUserId = req.session.auth.user_id;
       }
-      res.render("question-id", { question, sessionUserId, csrfToken: req.csrfToken() });
+      res.render("question-id", { question, sessionUserId, voteScore, csrfToken: req.csrfToken() });
     }
   })
 );
