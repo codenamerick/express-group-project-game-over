@@ -54,10 +54,6 @@ router.get('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
          ]
       }
    });
-
-   // console.log('-----------------');
-   // console.log(upVotes, downVotes)
-   // console.log('-----------------');
 }));
 
 router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
@@ -84,7 +80,10 @@ router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
          });
       }
 
-      // if (vote.up_vote )
+      // TODO: implement user voting changing
+      // if (vote.up_vote ) {
+
+      // }
 
    }
 

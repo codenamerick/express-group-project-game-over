@@ -3,9 +3,18 @@ window.addEventListener('load', async (e) => {
     console.log('hello from votes.js JS!');
 
     // TODO: load all vote counts for answers on a given page
-    const answers = document.querySelectorAll('.answer-container');
-    answers.forEach(async (ans) => {
-        // TO DO: interact with DB to pull all votes for given answer
+    const answerContainers = document.querySelectorAll('.answer-container');
+    answerContainers.forEach(async (ansContainer) => {
+        const answerId = ansContainer.id.split('-')[1]
+
+        //query db for upvotes
+        const score = await fetch('/votes', {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ answer_id: answerId })
+        })
+
+        //query db for downvotes
     })
 
 });
