@@ -1,6 +1,26 @@
 
 window.addEventListener('load', async (e) => {
-    console.log('Hello from votes.js JS!!!!')
+    console.log('hello from votes.js JS!');
+
+    const answers = document.querySelectorAll('.answer-container');
+
+    console.log(answers);
+
+    // voteCounter helper function
+    const voteCounter = async (ans) => {
+        const upVotes = await Vote.findAll({
+            where: {
+                [Op.and]: [
+                    {answer_id: ans.id},
+                    {upvote: true}
+                ]
+            }
+        })
+    }
+
+    answers.forEach((ans) => {
+
+    })
 });
 
 
