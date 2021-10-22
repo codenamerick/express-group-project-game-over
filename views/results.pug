@@ -1,0 +1,16 @@
+extends layout.pug
+
+include utils.pug
+
+block content
+  main.question-list-container
+    div
+      div.question-list-header
+        h1 This Is What We Found...
+        form(id='questions_button' method='get' action='/questions/ask')
+            button(type='submit' class='default-ask-button') Ask Question
+      div(class="results_list")
+        ul
+          each question in questions
+            li(id='result')
+              a(id='link_questions' value=question.id href="/questions/" + question.id)= question.title
