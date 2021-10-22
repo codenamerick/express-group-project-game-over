@@ -17,6 +17,10 @@ block content
       each answer in question.Answers
         div(class='answer-container' id=`answer-${answer.id}-container`)
           p= answer.answer
+          div
+            button(href="" class='vote-btn up-vote') Up vote
+            //- p=voteCounter
+            button(href="" class='vote-btn down-vote') Down vote
           if answer.user_id === sessionUserId
             a(href=`/answers/${answer.id}/edit` class='main-btn') Edit
             form(action=`/questions/${question.id}/answers/${answer.id}` method='delete')

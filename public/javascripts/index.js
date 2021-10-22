@@ -16,12 +16,6 @@ window.addEventListener("load", (event) => {
           method: "POST",
         }
       );
-
-      // const data = await res.json();
-      // if (data.message === "Success") {
-      //   const container = document.querySelector(`#question-${questionId}-container`)
-      //   container.remove();
-      // }
     });
   });
 

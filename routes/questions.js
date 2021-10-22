@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { csrfProtection, asyncHandler } = require("./utils");
 const db = require("../db/models");
-const { Question, User, Answer } = db;
+const { Question, User, Answer, Vote } = db;
 const { check, validationResult } = require("express-validator");
 const id = db.User.id;
 
@@ -41,10 +41,22 @@ router.get(
   csrfProtection,
   asyncHandler(async (req, res, next) => {
     const question = await Question.findByPk(req.params.id,
-      {
-        include: Answer,
-      }
+      {include: Answer}
+      // {
+      //   include: [{Answer, include: [Vote]}]
+      // }
+
+
+      // include: [{
+      //   model: Comment,
+      //   include: [User]
+      // }]
+
     );
+
+    console.log('----------------------');
+    console.log(question);
+    console.log('----------------------');
 
     if (question) {
       if (req.session.auth) {

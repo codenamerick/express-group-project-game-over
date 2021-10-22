@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { asyncHandler, csrfProtection } = require('./utils');
 const db = require('../db/models');
-const { Answer, Question } = db;
+const { Answer, Question, Vote } = db;
 const { requireAuth } = require('../auth');
 
 
@@ -28,6 +28,10 @@ router.post('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, 
 
    res.redirect(`/questions/${questionId}`);
 }));
+
+// Votes functionality below -----
+
+
 
 
 module.exports = router;

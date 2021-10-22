@@ -120,6 +120,10 @@ header > div {
    cursor: pointer;
 }
 
+.vote-btn {
+   background: lightgray;
+}
+
 
 /* --- media queries below --- */
 
