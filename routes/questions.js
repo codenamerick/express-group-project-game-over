@@ -47,6 +47,8 @@ router.get(
       }
     })
 
+    // const answers = question.Answers;
+
     if (question) {
       let sessionUserId;
       if (req.session.auth) {
