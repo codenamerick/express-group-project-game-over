@@ -56,7 +56,6 @@ router.get('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
    });
 
    const voteScore = upVotes - downVotes;
-   console.log(voteScore);
 }));
 
 router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {

@@ -52,10 +52,10 @@ router.get(
     // console.log(`-----------------`)
     // console.log(question.Answers[0].Votes)
     // console.log(`------------------`)
+  let voteScore = 0;
 
+  if(question.Answers.length) {
     const votes = question.Answers[0].Votes;
-
-    let voteScore = 0;
 
     votes.forEach((vote) => {
 
@@ -65,6 +65,7 @@ router.get(
         voteScore -= 1;
       }
     });
+  }
 
     if (question) {
       let sessionUserId;
