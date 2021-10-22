@@ -128,13 +128,31 @@ const loginValidators = [
     .exists({ checkFalsy: true })
     .withMessage("Please enter valid password"),
 ];
+//LOGIN DEMO USER
 
-//LOGIN ROUTES
-router.get('/login', csrfProtection, asyncHandler(async (req, res) => {
+router.get(
+  "/demo_user",
+  csrfProtection,
+  asyncHandler(async (req, res) => {
+    const demoPassword = 'Scarecrows!4'
+    const { email, password } = req.body;
+    const validatorErrors = validationResult(req);
+    let errors = [];
+    if (validatorErrors.isEmpty()) {
+      const user = await User.findOne({
+          where: {
+            email: 'demo@demo.com'
+          }
+      });
+      console.log()
+loginUser(req, res, user)
+    }
+    console.log('made it to the bottom of the function! yay')
+  return res.redirect('/')
+  })
+);
 
-  res.render('user-login', { csrfToken: req.csrfToken() })
-}));
-
+//LOGIN ROUTE FOR NORMAL USER
 router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, res) => {
   const { email, password } = req.body
 
