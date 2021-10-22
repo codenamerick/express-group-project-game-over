@@ -9,7 +9,10 @@ const id = db.User.id
 // TODO: add requiredAuth to access questions text field
 
 router.get('/', asyncHandler( async (req, res) => {
-  const questions = await Question.findAll();
+  const questions = await Question.findAll({
+    limit: 15,
+    order: [['createdAt', 'DESC']]
+  });
   res.render('questions', { questions } );
 }))
 
