@@ -1,13 +1,16 @@
 const db = require('../../db/models');
 const { Vote, Answer } = db;
 
-window.addEventListener("DOMContentLoaded", async (event) => {
+window.addEventListener("load", async (event) => {
 
-    const voteCounter = await Vote.findAll({
-        where: {
-            answer_id
-        }
-    });
+    const upVoteCounter = async (value) => {
+        await Vote.findAll({
+            where: {
+                answer_id: value,
+                
+            }
+        })
+    };
 
     // implement down vote btn func below ---
 

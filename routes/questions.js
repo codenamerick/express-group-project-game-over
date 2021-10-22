@@ -41,29 +41,18 @@ router.get(
   csrfProtection,
   asyncHandler(async (req, res, next) => {
     const question = await Question.findByPk(req.params.id, {
-      include: [Answer]
+      include: {
+        model: Answer,
+        include: Vote
+      }
     })
-
-    const answers = question.Answers
-    let voteArr = [];
-    answers.forEach(async (ans) => {
-      const votes = await Vote.findAll({
-        where: {answer_id: ans.id}
-      })
-      voteArr = [...voteArr, ...votes]
-      console.log(voteArr)
-    })
-
 
     if (question) {
-
       let sessionUserId;
       if (req.session.auth) {
         sessionUserId = req.session.auth.user_id;
       }
       res.render("question-id", { question, sessionUserId, csrfToken: req.csrfToken() });
-
-
     }
   })
 );
