@@ -31,15 +31,20 @@ window.addEventListener("DOMContentLoaded", (e) => {
             const res = await fetch(`/answers/${answerId}/votes`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ up_vote: false })
+                body: JSON.stringify({ up_vote: false , btn: "down vote"})
             });
 
             // dynamically updating voteScore
-            const data = await res.json()
+            const voteScoreContainer = document.querySelector(`#answer-${answerId}-voteScore`);
+            const currScore = parseInt(voteScoreContainer.innerText, 10);
+
+            const data = await res.json();
+
             if (data.message === "vote created") {
-                const voteScoreContainer = document.querySelector(`#answer-${answerId}-voteScore`);
-                const currScore = parseInt(voteScoreContainer.innerText, 10);
                 const newScore = currScore - 1;
+                voteScoreContainer.innerText = newScore;
+            } else if (data.message === "down vote removed") {
+                const newScore = currScore + 1;
                 voteScoreContainer.innerText = newScore;
             }
         })
@@ -55,15 +60,20 @@ window.addEventListener("DOMContentLoaded", (e) => {
             const res = await fetch(`/answers/${answerId}/votes`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ up_vote: true })
+                body: JSON.stringify({ up_vote: true, btn: "up vote" })
             });
 
             // dynamically updating voteScore
+            const voteScoreContainer = document.querySelector(`#answer-${answerId}-voteScore`);
+            const currScore = parseInt(voteScoreContainer.innerText, 10);
+
             const data = await res.json()
+
             if (data.message === "vote created") {
-                const voteScoreContainer = document.querySelector(`#answer-${answerId}-voteScore`);
-                const currScore = parseInt(voteScoreContainer.innerText, 10);
                 const newScore = currScore + 1;
+                voteScoreContainer.innerText = newScore;
+            } else if (data.message === "up vote removed") {
+                const newScore = currScore - 1;
                 voteScoreContainer.innerText = newScore;
             }
         })
