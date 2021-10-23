@@ -56,8 +56,12 @@ router.get('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
    });
 
    const voteScore = upVotes - downVotes;
+
+   res.json({ "voteScore": voteScore })
 }));
 
+
+// creating votes for a given answer
 router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
    const answer = await Answer.findByPk(req.params.id);
    const userId = req.session.auth.user_id;
@@ -74,13 +78,18 @@ router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
          }
       })
 
-      // if (!vote) {
-         return await Vote.create({
+      if (!vote) {
+         const newVote = await Vote.create({
             answer_id: answer.id,
             user_id: userId,
             up_vote
          });
-      // }
+
+         if (newVote) {
+            // const up_vote  = newVote.up_vote;
+            res.json({ message: "vote created" })
+         }
+      }
 
       // TODO: implement user voting changing
       // if (vote.up_vote ) {
