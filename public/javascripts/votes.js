@@ -9,14 +9,11 @@ window.addEventListener('DOMContentLoaded', async (e) => {
         const answerId = ansContainer.id.split('-')[1]
 
         //db query for voteScore
-        const res = await fetch(`/answers/${answerId}/votes`, {
-            method: "GET",
-            // headers: { "Content-Type": "application/json" },
-            // body: JSON.stringify({ answer_id: answerId })
-        })
-        // const { voteScore } = await res.json()
-        // const scoreContainer = document.querySelector(`.answer-${answerId}-voteScore`);
-        // console.log(ansContainer);
+        const res = await fetch(`/answers/${answerId}/votes`)
+        const data = await res.json();
+        const { voteScore } = data;
+        const voteScoreContainer = document.querySelector(`#answer-${answerId}-voteScore`);
+        voteScoreContainer.innerText = voteScore;
     })
 
 });
@@ -24,7 +21,7 @@ window.addEventListener('DOMContentLoaded', async (e) => {
 
 window.addEventListener("DOMContentLoaded", (e) => {
 
-    // implement down vote btn func below ---
+    // up vote button functionality
     const downVoteBtns = document.querySelectorAll('.down-vote-btn');
 
     downVoteBtns.forEach(btn => {
@@ -37,6 +34,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
                 body: JSON.stringify({ up_vote: false })
             });
 
+            // dynamically updating voteScore
             const data = await res.json()
             if (data.message === "vote created") {
                 const voteScoreContainer = document.querySelector(`#answer-${answerId}-voteScore`);
@@ -47,7 +45,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
         })
     })
 
-    // implement up vote btn func below ---
+    // up vote button functionality
     const upVoteBtns = document.querySelectorAll('.up-vote-btn');
 
     upVoteBtns.forEach(btn => {
@@ -60,6 +58,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
                 body: JSON.stringify({ up_vote: true })
             });
 
+            // dynamically updating voteScore
             const data = await res.json()
             if (data.message === "vote created") {
                 const voteScoreContainer = document.querySelector(`#answer-${answerId}-voteScore`);
