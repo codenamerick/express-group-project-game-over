@@ -46,6 +46,9 @@ window.addEventListener("DOMContentLoaded", (e) => {
             } else if (data.message === "down vote removed") {
                 const newScore = currScore + 1;
                 voteScoreContainer.innerText = newScore;
+            } else if (data.message === "up vote removed") {
+                const newScore = currScore - 1;
+                voteScoreContainer.innerText = newScore;
             }
         })
     })
@@ -74,6 +77,9 @@ window.addEventListener("DOMContentLoaded", (e) => {
                 voteScoreContainer.innerText = newScore;
             } else if (data.message === "up vote removed") {
                 const newScore = currScore - 1;
+                voteScoreContainer.innerText = newScore;
+            } else if (data.message === "down vote removed") {
+                const newScore = currScore + 1;
                 voteScoreContainer.innerText = newScore;
             }
         })

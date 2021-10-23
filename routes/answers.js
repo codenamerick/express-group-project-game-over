@@ -93,6 +93,7 @@ router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
 
       // changing votes / deleting votes / removing votes
       const { btn } = req.body;
+
       if (!vote.up_vote && btn === 'down vote') {
          await vote.destroy();
          return res.json({ message: "down vote removed" });
@@ -102,9 +103,18 @@ router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
          await vote.destroy();
          return res.json({ message: "up vote removed" });
       }
-   }
 
-}))
+      if (vote.up_vote && btn === 'down vote') {
+         await vote.destroy();
+         return res.json({ message: "up vote removed" });
+      }
+
+      if (!vote.up_vote && btn === 'up vote') {
+         await vote.destroy();
+         return res.json({ message: "down vote removed" });
+      }
+   }
+}));
 
 
 
