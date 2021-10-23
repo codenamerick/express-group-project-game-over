@@ -1,5 +1,5 @@
 
-window.addEventListener('DOMContentLoaded', async (e) => {
+window.addEventListener('load', async (e) => {
     console.log('hello from votes.js JS!');
 
     // Load voteScore for individual answers
