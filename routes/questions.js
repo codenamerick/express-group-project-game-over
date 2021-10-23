@@ -8,12 +8,12 @@ const id = db.User.id;
 
 const { requireAuth } = require("../auth");
 
-router.get('/', asyncHandler( async (req, res) => {
+router.get('/', asyncHandler(async (req, res) => {
   const questions = await Question.findAll({
     limit: 15,
     order: [['createdAt', 'DESC']]
   });
-  res.render('questions', { questions } );
+  res.render('questions', { questions });
 }))
 
 router.get(
@@ -48,31 +48,12 @@ router.get(
       }
     })
 
-    // const answers = question.Answers;
-    // console.log(`-----------------`)
-    // console.log(question.Answers[0].Votes)
-    // console.log(`------------------`)
-  let voteScore = 0;
-
-  if(question.Answers.length) {
-    const votes = question.Answers[0].Votes;
-
-    votes.forEach((vote) => {
-
-      if (vote.up_vote) {
-        voteScore += 1;
-      } else {
-        voteScore -= 1;
-      }
-    });
-  }
-
     if (question) {
       let sessionUserId;
       if (req.session.auth) {
         sessionUserId = req.session.auth.user_id;
       }
-      res.render("question-id", { question, sessionUserId, voteScore, csrfToken: req.csrfToken() });
+      res.render("question-id", { question, sessionUserId, csrfToken: req.csrfToken() });
     }
   })
 );
