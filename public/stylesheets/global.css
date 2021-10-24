@@ -1,5 +1,4 @@
 * {
-
    padding: 0;
    margin: 0;
    box-sizing: border-box;
@@ -7,13 +6,21 @@
 }
 
 body {
+   color: #003440;
    font-family: 'Abel', sans-serif;
+   font-size: 14px;
    background: #F1F2F3;
    padding-top: 50px;
 }
 
 a {
+   color: #003440;
    text-decoration: none;
+   transition: all 250ms;
+}
+
+a:hover {
+   color: #D928F0;
 }
 
 header {
@@ -22,22 +29,19 @@ header {
    padding: 8px 10px;
    position: fixed;
    width: 100%;
-   top: 2px;
-
-   /* display: none; */
+   top: 3px;
 }
 
 header > div {
    display: flex;
    align-items: center;
-   flex-wrap: wrap;
    justify-content: space-between;
    margin: 0 auto;
    max-width: 1240px;
 }
 
 .style-divider {
-   height: 2px;
+   height: 3px;
    position: fixed;
    top: 0;
    width: 100%;
@@ -70,11 +74,6 @@ header > div {
    margin-right: 16px;
 }
 
-.nav-right .main-btn {
-   margin-left: 4px;
-   padding: 6px 8px;
-}
-
 .nav-right .log-in-btn {
    background: #E1ECF4;
    border: 1px solid #2098FB;
@@ -86,7 +85,7 @@ header > div {
 }
 
 .searchForm input {
-   padding-right: 28px;
+   padding-right: 28px !important;
    width: 100%;
 }
 
@@ -105,6 +104,13 @@ header > div {
    width: 75%;
 }
 
+.user-greeting {
+   margin-left: 10px;
+}
+
+.user-greeting, .main-btn {
+   white-space: nowrap;
+}
 
 /* --- button styling --- */
 
@@ -112,13 +118,22 @@ header > div {
    background: #2098FB;
    color: white;
    border: 1px solid #2098FB;
+   border-radius: 4px;
+   font-family: 'Abel', sans-serif;
+   margin-left: 4px;
+   padding: 6px 8px;
    transition: all 250ms;
 }
 
 .main-btn:hover {
+   color: #fff;
    background: #1977C9;
    border: 1px solid #1977C9;
    cursor: pointer;
+}
+
+.log-out-btn {
+   margin-left: 10px;
 }
 
 .vote-btn {
@@ -141,26 +156,26 @@ header > div {
    }
 
    .nav-left li {
-      margin: 0;
+      margin: 4px 0;
    }
 
    .nav-left ul {
+      flex-direction: column;
       margin: 2px 0 6px 0;
    }
 
    .searchForm {
       width: 100%;
-      /* margin: 5px 0 3px 0; */
    }
 
    .nav-right {
+      justify-content: center;
       margin-bottom: 10px;
       margin-top: 8px;
+      width: 100%;
    }
-}
 
-
-/* --- list styling ---*/
-ul{
-   list-style-type: none;
+   .nav-right > a:first-child {
+      margin-left: 0;
+   }
 }

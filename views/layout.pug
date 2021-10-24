@@ -25,18 +25,15 @@ html
           form(action="/results" method='get').searchForm
             input(type="hidden" name="_csrf" value=csrfToken)
             div
-              input(type='search' placeholder='Search...' name="search" value=search)
-
-
+              input(type='search' placeholder='Search Questions...' name="search" value=search)
+              <i class="fas fa-search"></i>
         div.nav-right
           if locals.authenticated
-            span #{user.first_name} logged in
+            span(class='user-greeting') Welcome, #{user.first_name}!
             form(action='/users/logout' method='post')
-              button(class='main-btn') Logout
+              button(class='main-btn log-out-btn') Log out
           else
-            span
-              form(action='/users/demo_user')
-                button(type='submit' class='main-btn') Demo Log in
-              a(href='/users/login' class='main-btn log-in-btn') Log in
-              a(href='/users/sign-up' class='main-btn') Sign up
+            a(href='/users/demo_user' class='main-btn') Demo User
+            a(href='/users/login' class='main-btn log-in-btn') Log in
+            a(href='/users/sign-up' class='main-btn') Sign up
     block content
