@@ -16,5 +16,7 @@ block content
         ul
           each question in questions
             li
-              a(id='link_questions' value=question.id href="/questions/" + question.id)= question.title
-              a(href="/questions/" + question.id class='main-btn') Answer
+              div.question-heading
+                a(id='link_questions' class='question-title' value=question.id href="/questions/" + question.id)= question.title
+                a(href="/questions/" + question.id class='answer-btn') Answer
+              p= question.question

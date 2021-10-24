@@ -11,8 +11,15 @@ const { requireAuth } = require("../auth");
 router.get('/', asyncHandler(async (req, res) => {
   const questions = await Question.findAll({
     limit: 15,
-    order: [['createdAt', 'DESC']]
+    order: [['createdAt', 'DESC']],
+    // trying to serve username and answer count w/questions to front-end
+    // include: User
   });
+
+  // console.log('-------------------');
+  // console.log(questions[1].User.user_name);
+  // console.log('-------------------');
+
   res.render('questions', { questions });
 }))
 
@@ -99,7 +106,7 @@ router.post('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, 
 const answerValidators = [
   check("answer")
     .exists({ checkFalsy: true })
-    .withMessage("Please provide email address."),
+    .withMessage("Please provide an answer."),
 ];
 
 router.post(

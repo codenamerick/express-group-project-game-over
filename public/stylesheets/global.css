@@ -22,6 +22,10 @@ a:hover {
    color: #D928F0;
 }
 
+input {
+   font-family: 'Abel', sans-serif;
+}
+
 header {
    background: #F8F9F9;
    box-shadow: 0 10px 25px rgb(0 0 0 / 5%), 0 20px 48px rgb(0 0 0 / 5%), 0 1px 4px rgb(0 0 0 / 10%);
@@ -73,7 +77,7 @@ header > div {
    margin-right: 16px;
 }
 
-.nav-right .log-in-btn {
+.nav-right .log-in-btn, .answer-btn {
    background: #E1ECF4;
    border: 1px solid #2098FB;
    color: #2098FB;
@@ -124,7 +128,16 @@ header > div {
    transition: all 250ms;
 }
 
-.main-btn:hover {
+.answer-btn {
+   border: 1px solid #2098FB;
+   border-radius: 4px;
+   font-family: 'Abel', sans-serif;
+   margin-left: 4px;
+   padding: 6px 8px;
+   transition: all 250ms;
+}
+
+.main-btn:hover, .answer-btn:hover {
    color: #fff;
    background: #1977C9;
    border: 1px solid #1977C9;
