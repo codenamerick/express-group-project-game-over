@@ -87,29 +87,35 @@ router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
 
          if (newVote) {
             // const up_vote  = newVote.up_vote;
-            res.json({ message: "vote created" })
+            return res.json({ message: "vote created" })
          }
       }
 
-      // TODO: implement user voting changing
-      // if (vote.up_vote ) {
+      // changing votes / deleting votes / removing votes
+      const { btn } = req.body;
 
-      // }
+      if (!vote.up_vote && btn === 'down vote') {
+         await vote.destroy();
+         return res.json({ message: "down vote removed" });
+      }
 
+      if (vote.up_vote && btn === 'up vote') {
+         await vote.destroy();
+         return res.json({ message: "up vote removed" });
+      }
+
+      if (vote.up_vote && btn === 'down vote') {
+         await vote.destroy();
+         return res.json({ message: "up vote removed" });
+      }
+
+      if (!vote.up_vote && btn === 'up vote') {
+         await vote.destroy();
+         return res.json({ message: "down vote removed" });
+      }
    }
-
-}))
+}));
 
 
 
 module.exports = router;
-
-
-/*
-
-     // console.log('----------------');
-      // console.log(vote);
-      // console.log('----------------');
-
-
-*/

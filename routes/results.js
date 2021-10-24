@@ -7,12 +7,12 @@ const { Question, User } = db;
 const { Op } = require('sequelize');
 const id = db.User.id
 
-async function searchQuestions(question) {
-  // let user = User.findById(id)
+// async function searchQuestions(question) {
+//   // let user = User.findById(id)
 
-  console.log('test', questions);
-  return questions;
-}
+//   console.log('test', questions);
+//   return questions;
+// }
 
 
 
@@ -20,7 +20,6 @@ router.get(
   "/",
   csrfProtection,
   asyncHandler(async (req, res) => {
-    console.log('we made it into the async function!')
     const { search } = req.query
     let questions = await Question.findAll({
       where: {
@@ -32,8 +31,6 @@ router.get(
         model: User
       },
     });
-    console.log(questions);
-    console.log('the above listed are question objects')
     res.render("results", { questions });
   })
 );
