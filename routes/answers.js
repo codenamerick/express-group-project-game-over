@@ -119,13 +119,3 @@ router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
 
 
 module.exports = router;
-
-
-/*
-
-     // console.log('----------------');
-      // console.log(vote);
-      // console.log('----------------');
-
-
-*/

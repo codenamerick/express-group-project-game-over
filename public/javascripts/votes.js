@@ -1,6 +1,6 @@
 
 window.addEventListener('load', async (e) => {
-    console.log('hello from votes.js JS!');
+    // console.log('hello from votes.js JS!');
 
     // Load voteScore for individual answers
     const answerContainers = document.querySelectorAll('.answer-container');

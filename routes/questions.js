@@ -30,9 +30,8 @@ router.post(
   asyncHandler(async (req, res) => {
     const { title, question, user_id } = req.body;
     const user = User.findOne(id);
-    await Question.create({ title, question, user_id, user });
-
-    res.redirect("/questions");
+    const newQuestion = await Question.create({ title, question, user_id, user });
+    res.redirect(`/questions/${newQuestion.id}`);
   })
 );
 
@@ -59,7 +58,6 @@ router.get(
 );
 
 // Delete question
-
 router.post('/:id(\\d+)/delete', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
 
   const questionId = req.params.id;

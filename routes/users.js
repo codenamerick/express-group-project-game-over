@@ -78,8 +78,13 @@ router.get(
   "/sign-up",
   csrfProtection,
   asyncHandler(async (req, res) => {
-    const user = await User.build();
-    res.render("sign-up", { user, csrfToken: req.csrfToken() });
+
+    if (req.session.auth) {
+      res.redirect('/');
+    } else {
+      const user = await User.build();
+      res.render("sign-up", { user, csrfToken: req.csrfToken() });
+    }
   })
 );
 
@@ -130,7 +135,13 @@ router.get(
   "/login",
   csrfProtection,
   asyncHandler(async (req, res) => {
-    res.render("user-login", { csrfToken: req.csrfToken() });
+
+    // if a user session already exists, redirect to homepage
+    if (req.session.auth) {
+      res.redirect('/');
+    } else {
+      res.render("user-login", { csrfToken: req.csrfToken() });
+    }
   })
 );
 
@@ -139,6 +150,7 @@ router.post(
   csrfProtection,
   loginValidators,
   asyncHandler(async (req, res) => {
+
     const { email, password } = req.body;
 
     const validatorErrors = validationResult(req);
@@ -192,10 +204,8 @@ router.get(
           email: "demo@demo.com",
         },
       });
-      console.log();
       loginUser(req, res, user);
     }
-    console.log("made it to the bottom of the function! yay");
     return res.redirect("/");
   })
 );
@@ -203,9 +213,8 @@ router.get(
 
 //DEMO LOGIN ROUTES
 
-router.get('/login-demo', csrfProtection, asyncHandler( async (req, res) => {
+router.get('/login-demo', csrfProtection, asyncHandler(async (req, res) => {
   let demoUser = await User.findByPk(1);
-  console.log(demoUser)
 
   loginUser(req, res, demoUser);
   res.redirect('/');

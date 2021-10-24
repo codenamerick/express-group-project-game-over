@@ -1,21 +1,26 @@
 window.addEventListener("load", (event) => {
-  console.log("hello from index.js javascript!");
+  // console.log("hello from index.js javascript!");
 
-  // Question delete func below
+  // // Question delete func below -- EVENT LISTENER NOT NEEDED BC QUESTION DELETE BUTTON IS USING FORM (question-id PUG FILE)
 
-  const deleteQuestionBtn = document.querySelectorAll('.question-delete-btn');
-  deleteQuestionBtn.forEach((btn) => {
-    btn.addEventListener("click", async (e) => {
-      const questionId = e.target.id.split("-")[2];
+  // const deleteQuestionBtn = document.querySelectorAll('.question-delete-btn');
+  // deleteQuestionBtn.forEach((btn) => {
+  //   btn.addEventListener("click", async (e) => {
+  //     const questionId = e.target.id.split("-")[2];
 
-      const res = await fetch(
-        `/questions/${questionId}`,
-        {
-          method: "POST",
-        }
-      );
-    });
-  });
+  //     console.log(questionId)
+
+  //     // const res = await fetch(
+  //     //   `/questions/${questionId}`,
+  //     //   {
+  //     //     method: "POST",
+  //     //   }
+  //     // );
+
+  //     console.log('-----------')
+
+  //   });
+  // });
 
   // Answer delete func below
 
