@@ -44,6 +44,7 @@ window.addEventListener("load", (event) => {
         const container = document.querySelector(`#answer-${answerId}-container`)
         container.remove();
       }
+
     });
   });
 });
