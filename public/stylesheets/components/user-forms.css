@@ -53,3 +53,15 @@ label {
    justify-content: center;
    min-height: 600px;
 }
+
+.userForm .main-btn {
+   margin: 0;
+}
+
+/* --- Login/Sign up page media queries below --- */
+
+@media screen and (max-width: 575px) {
+   .form_container {
+      min-height: 1000px;
+   }
+}
