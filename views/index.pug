@@ -7,7 +7,14 @@ append head
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
-  main.question-list-container
+  section
+    img(src="/images/character-bg.png", alt="Video Game Characters")
+    div.hero-container
+      h2 "Earth's greatest resource for accessing quick tips and tricks to conquering your favorite video game. Post a question and get ready for that mightily fast answer!" - Sonic the Hedgehog (GameOver Ambassador)
+      div
+        img(src="/images/game-over-sample-logo-removebg-preview.png", alt="Game Over Logo" class='hero-logo')
+  div.dark-divider
+  main(class='question-list-container')
     div
       div.question-list-header
         h1= "Top Questions"

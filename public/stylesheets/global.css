@@ -77,6 +77,10 @@ header > div {
    margin-right: 16px;
 }
 
+.logo-link {
+   display: flex;
+}
+
 .nav-right .log-in-btn, .answer-btn {
    background: #E1ECF4;
    border: 1px solid #2098FB;

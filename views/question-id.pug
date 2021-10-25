@@ -11,7 +11,13 @@ block content
     div
       div(class='answer-header')
         h1(class='question-title')= question.title
-        p= question.question
+        div
+          if question.user_id === sessionUserId
+            a(href=`/questions/${question.id}/edit` class='answer-btn') Edit
+            form(action=`/questions/${question.id}/delete` method='post')
+              input(type="hidden" name='_csrf' value=csrfToken)
+              button(class='main-btn question-delete-btn' id=`delete-question-${question.id}`) Delete
+      p= question.question
       div
         form(action=`/questions/${question.id}/answers` method='post' class='main-answer-form')
           div(class='answer-container answer-form-container')
@@ -21,11 +27,7 @@ block content
               textarea(name="answer" placeholder='Type your answer here...')
             div
               button(class='answer-btn') Submit answer
-      if question.user_id === sessionUserId
-            a(href=`/questions/${question.id}/edit` class='main-btn') Edit
-            form(action=`/questions/${question.id}/delete` method='post')
-              input(type="hidden" name='_csrf' value=csrfToken)
-              button(class='question-delete-btn' id=`delete-question-${question.id}`) Delete
+      h2 Answers
       div.answers-list
         each answer in question.Answers
           div(class='answer-container dynamic-answer-wrapper' id=`answer-${answer.id}-container`)

@@ -1,5 +1,7 @@
 @import url("global.css");
 
+@import url("components/index.css");
+
 @import url("components/user-forms.css");
 @import url("components/question-list.css");
 

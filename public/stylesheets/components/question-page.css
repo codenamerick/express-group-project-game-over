@@ -8,9 +8,9 @@
 }
 
 .answer-form-container {
-  border-bottom: none !important;
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
 }
 
 .answer-form-container > div {
@@ -85,7 +85,14 @@
 }
 
 .answer-header {
+  display: flex;
+  justify-content: space-between;
   padding-bottom: 16px;
+}
+
+.answer-header > div {
+  display: flex;
+  align-items: center;
 }
 
 .answer-content {
@@ -99,6 +106,10 @@
 
 .question-container .answer-btn {
   margin-left: 0;
+}
+
+.question-container h2 {
+  margin: 20px 10px;
 }
 
 .vote-btn {
