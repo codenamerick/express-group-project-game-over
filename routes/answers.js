@@ -33,7 +33,7 @@ router.post('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, 
 // VOTING ON ANSWERS FUNCTIONALITY
 
 // getting votes for a given answer
-router.get('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
+router.get('/:id(\\d+)/votes', asyncHandler(async (req, res) => {
 
    // getting all upvotes for given answer
    const { count: upVotes } = await Vote.findAndCountAll({
@@ -67,6 +67,10 @@ router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
    const userId = req.session.auth.user_id;
 
    const { up_vote } = req.body
+
+   // if (answer && !userId) {
+   //    console.log('this is working!!--------------');
+   // }
 
    if (answer && userId) {
       const vote = await Vote.findOne({
