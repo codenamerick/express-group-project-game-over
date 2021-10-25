@@ -33,7 +33,7 @@ router.post('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, 
 // VOTING ON ANSWERS FUNCTIONALITY
 
 // getting votes for a given answer
-router.get('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
+router.get('/:id(\\d+)/votes', asyncHandler(async (req, res) => {
 
    // getting all upvotes for given answer
    const { count: upVotes } = await Vote.findAndCountAll({
@@ -68,6 +68,12 @@ router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
 
    const { up_vote } = req.body
 
+   // Need to figure out how to redirect user to login/signup page if they are trying to interact w/vote btns and are not logged in.
+
+   // if (!answer && userId || answer && !userId) {
+   //    res.redirect('/users/login');
+   // }
+
    if (answer && userId) {
       const vote = await Vote.findOne({
          where: {
@@ -86,7 +92,6 @@ router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
          });
 
          if (newVote) {
-            // const up_vote  = newVote.up_vote;
             return res.json({ message: "vote created" })
          }
       }
@@ -113,6 +118,8 @@ router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
          await vote.destroy();
          return res.json({ message: "down vote removed" });
       }
+   } else {
+      res.redirect('/users/login');
    }
 }));
 

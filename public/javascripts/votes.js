@@ -3,15 +3,18 @@ window.addEventListener('load', async (e) => {
     // console.log('hello from votes.js JS!');
 
     // Load voteScore for individual answers
-    const answerContainers = document.querySelectorAll('.answer-container');
+    const answerContainers = document.querySelectorAll('.dynamic-answer-wrapper');
 
     answerContainers.forEach(async (ansContainer) => {
         const answerId = ansContainer.id.split('-')[1]
 
         //db query for voteScore
         const res = await fetch(`/answers/${answerId}/votes`)
+
         const data = await res.json();
+
         const { voteScore } = data;
+
         const voteScoreContainer = document.querySelector(`#answer-${answerId}-voteScore`);
         voteScoreContainer.innerText = voteScore;
     })

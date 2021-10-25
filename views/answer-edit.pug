@@ -4,13 +4,15 @@ include utils.pug
 
 block content
    main
-      div
-         p= answer.Question.question
-      div
-         form(action=`/answers/${answer.id}` method='post')
-            input(name='_csrf' type='hidden' value=csrfToken)
-            div
-               label(for="answer" ) Edit answer...
-               textarea(name="answer" value=answer.answer) #{answer.answer}
-            div
-               button.main-btn Save
+      div(class='questionContainer question-list-container edit-form')
+         div
+            h1 Edit your answer below.
+            div.question-list-header
+               p= answer.Question.question
+            form(action=`/answers/${answer.id}` method='post' class='question-form answer-form-container')
+               input(name='_csrf' type='hidden' value=csrfToken)
+               div
+                  label(for="answer" ) Edit your answer...
+                  textarea(name="answer" value=answer.answer require) #{answer.answer}
+               div
+                  button.main-btn Save

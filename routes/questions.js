@@ -11,7 +11,7 @@ const { requireAuth } = require("../auth");
 router.get('/', asyncHandler(async (req, res) => {
   const questions = await Question.findAll({
     limit: 15,
-    order: [['createdAt', 'DESC']]
+    order: [['createdAt', 'DESC']],
   });
   res.render('questions', { questions });
 }))
@@ -99,7 +99,7 @@ router.post('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, 
 const answerValidators = [
   check("answer")
     .exists({ checkFalsy: true })
-    .withMessage("Please provide email address."),
+    .withMessage("Please provide an answer."),
 ];
 
 router.post(

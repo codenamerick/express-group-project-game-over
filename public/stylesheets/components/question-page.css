@@ -1,0 +1,256 @@
+.question-container > div {
+  background: #fff;
+  padding: 30px;
+}
+
+.main-answer-form {
+  padding: 16px 10px 0 10px;
+}
+
+.answer-form-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.answer-form-container > div {
+  width: 100%;
+}
+
+.answer-form-container textarea {
+  background: #F1F2F3;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  font-family: 'Abel', sans-serif;
+  padding: 20px;
+  margin-bottom: 16px;
+  min-height: 100px;
+  max-height: 300px;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  transition: all 250ms;
+  width: 100%;
+}
+
+.answer-form-container textarea:focus {
+  border: 1px solid #2098FB;
+}
+
+.answer-container {
+  border-top: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.answer-container:last-child {
+  border-bottom: 1px solid lightgray;
+}
+
+.answers-list {
+  padding: 0 10px;
+}
+
+.vote-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.vote-container p {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.answer-controls-right {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.answer-controls-right a {
+  margin-bottom: 4px;
+  width: 100%;
+}
+
+.answer-controls-right form button {
+  margin-left: 0;
+}
+
+.answer-header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 16px;
+}
+
+.answer-header > div {
+  display: flex;
+  align-items: center;
+}
+
+.answer-content {
+  background: #F1F2F3;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  margin: 0 10px;
+  padding: 20px;
+  width: 86%;
+}
+
+.question-container .answer-btn {
+  margin-left: 0;
+}
+
+.question-container h2 {
+  margin: 20px 10px;
+}
+
+.vote-btn {
+  border: 1px solid #E41EF5;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Abel', sans-serif;
+  padding: 6px 8px;
+  transition: all 250ms;
+}
+
+.up-vote-btn {
+  background: #E41EF5;
+  color: #fff;
+}
+
+.down-vote-btn {
+  background: #fff;
+  color: #E41EF5;
+}
+
+.vote-btn:hover {
+  transform: scale(1.05) translateX(2%);
+}
+
+.answer-header .question-title {
+  font-size: 2em;
+  margin-bottom: 16px;
+}
+
+.answer-header .question-title:hover {
+  transform: none;
+}
+
+/* --- Styling for ask/edit question and edit answer --- */
+
+.question-form {
+  text-align: left;
+}
+
+.question-form input {
+  background: #F1F2F3;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  font-family: 'Abel', sans-serif;
+  padding: 20px;
+  margin: 3px 0 16px 0;
+  transition: all 250ms;
+  width: 100%;
+}
+
+.question-form input:focus {
+  border: 1px solid #2098FB;
+}
+
+.question-form textarea {
+  margin-top: 3px;
+}
+
+.question-list-header h3 {
+  margin-bottom: 16px;
+}
+
+.question-form button {
+  margin-left: 0;
+}
+
+.question-list-header p {
+  margin-bottom: 16px;
+}
+
+.edit-form h1 {
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+/* #ask_label{
+ color: #000000;
+ text-shadow:#dc28f3 .65px .65px ;
+ display: flex;
+ text-align: start;
+} */
+
+/* button {
+   background: #2098FB;
+   color: white;
+   border: 1px solid #2098FB;
+   transition: all 250ms;
+   margin:4px;
+   padding: 6px 8px;
+   border-radius: 4px;
+} */
+
+/* input{
+  width: 80%;
+} */
+
+/* label{
+  font-size: 20px;
+  padding-top: 5px;
+  padding-bottom: 2px;
+  padding-left: 80px;
+  text-align: start;
+
+} */
+
+
+/* #question_box{
+  height: 100%;
+  width: 80%;
+  ;
+
+} */
+
+
+/* --- Media queries below --- */
+
+@media screen and (max-width: 575px) {
+  .question-container > div {
+     padding-left: 10px;
+     padding-right: 10px;
+  }
+
+  .answer-content {
+    margin: 25px 0;
+    width: 100%;
+  }
+
+  .answer-container {
+    flex-direction: column;
+  }
+
+  .answer-controls-right form {
+    width: 100%;
+  }
+
+  .answer-controls-right form button {
+    width: 100%;
+  }
+
+  .vote-btn:hover {
+    transform: scale(1.05) translateX(0);
+  }
+}

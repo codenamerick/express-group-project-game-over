@@ -23,8 +23,8 @@ label {
    margin-bottom: 3px;
 }
 
-.userForm input, .main-btn, .searchForm input {
-   padding: 6px 6px;
+.userForm input, .searchForm input {
+   padding: 7px 6px;
    border-radius: 4px;
 }
 
@@ -52,4 +52,29 @@ label {
    align-items: center;
    justify-content: center;
    min-height: 600px;
+}
+
+.userForm .main-btn {
+   margin: 0;
+}
+
+.form_container p {
+   margin-top: 16px;
+}
+
+.std-link {
+   color: #2098FB;
+   margin-left: 4px;
+}
+
+.std-link:hover {
+   color: #2098FB;
+}
+
+/* --- Login/Sign up page media queries below --- */
+
+@media screen and (max-width: 575px) {
+   .form_container {
+      min-height: 1000px;
+   }
 }

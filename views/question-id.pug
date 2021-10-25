@@ -8,33 +8,37 @@ include utils.pug
 
 block content
   div(class='question-container' id=`question-${questionId}-container`)
-    h2= question.title
     div
-      p= question.question
-    div
-      if question.user_id === sessionUserId
-            a(href=`/questions/${question.id}/edit` class='main-btn') Edit
+      div(class='answer-header')
+        h1(class='question-title')= question.title
+        div
+          if question.user_id === sessionUserId
+            a(href=`/questions/${question.id}/edit` class='answer-btn') Edit
             form(action=`/questions/${question.id}/delete` method='post')
               input(type="hidden" name='_csrf' value=csrfToken)
-              button(class='question-delete-btn' id=`delete-question-${question.id}`) Delete
-    div
-      each answer in question.Answers
-        div(class='answer-container' id=`answer-${answer.id}-container`)
-          p= answer.answer
-          div
-            button(href=`/answers/${answer.id}/votes` class='vote-btn up-vote-btn' id=`upvote-answer-${answer.id}`) Up vote
-            p(id=`answer-${answer.id}-voteScore`) #{voteScore}
-            button(href=`/answers/${answer.id}/votes` class='vote-btn down-vote-btn' id=`downvote-answer-${answer.id}`) Down vote
-          if answer.user_id === sessionUserId
-            a(href=`/answers/${answer.id}/edit` class='main-btn') Edit
-            form(action=`/questions/${question.id}/answers/${answer.id}` method='delete')
-              input(type="hidden" name='_csrf' value=csrfToken)
-              button(class='answer-delete-btn' id=`question-${question.id}-delete-answer-${answer.id}`) Delete
-    div
-      form(action=`/questions/${question.id}/answers` method='post')
-        input(name='_csrf' type='hidden' value=csrfToken)
-        div
-          label(for="answer" )
-          textarea(name="answer")
-        div
-          button.main-btn Answer
+              button(class='main-btn question-delete-btn' id=`delete-question-${question.id}`) Delete
+      p= question.question
+      div
+        form(action=`/questions/${question.id}/answers` method='post' class='main-answer-form')
+          div(class='answer-container answer-form-container')
+            input(name='_csrf' type='hidden' value=csrfToken)
+            div
+              label(for="answer" )
+              textarea(name="answer" placeholder='Type your answer here...' require)
+            div
+              button(class='answer-btn') Submit answer
+      h2 Answers
+      div.answers-list
+        each answer in question.Answers
+          div(class='answer-container dynamic-answer-wrapper' id=`answer-${answer.id}-container`)
+            div.vote-container
+              button(href=`/answers/${answer.id}/votes` class='vote-btn up-vote-btn' id=`upvote-answer-${answer.id}`) Up vote
+              p(id=`answer-${answer.id}-voteScore`) #{voteScore}
+              button(href=`/answers/${answer.id}/votes` class='vote-btn down-vote-btn' id=`downvote-answer-${answer.id}`) Down vote
+            p(class='answer-content')= answer.answer
+            div.answer-controls-right
+              if answer.user_id === sessionUserId
+                a(href=`/answers/${answer.id}/edit` class='answer-btn') Edit
+                form(action=`/questions/${question.id}/answers/${answer.id}` method='delete')
+                  input(type="hidden" name='_csrf' value=csrfToken)
+                  button(class="main-btn" id=`question-${question.id}-delete-answer-${answer.id}` class='answer-dlt-btn') Delete
