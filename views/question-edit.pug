@@ -4,13 +4,16 @@ include utils.pug
 
 block content
    main
-      div.questionContainer
-         h3= question.title
-         form(action=`/questions/${question.id}` method='post')
-            input(name='_csrf' type='hidden' value=csrfToken)
-            div
-               label(for='question' id='ask_label') Question Content
-            div
-               textarea(name='question' value=question.question) #{question.question}
-            div
-               button.main-btn Save
+      div(class='questionContainer question-list-container edit-form')
+         div
+            h1 Edit your question below.
+            div.question-list-header
+               h3= question.title
+            form(action=`/questions/${question.id}` method='post' class='question-form answer-form-container')
+               input(name='_csrf' type='hidden' value=csrfToken)
+               div
+                  label(for='question' id='ask_label') Question Content
+               div
+                  textarea(name='question' value=question.question require) #{question.question}
+               div
+                  button.main-btn Save

@@ -136,6 +136,7 @@ header > div {
    border: 1px solid #2098FB;
    border-radius: 4px;
    font-family: 'Abel', sans-serif;
+   font-size: 13px;
    margin-left: 4px;
    padding: 6px 8px;
    transition: all 250ms;
