@@ -24,11 +24,12 @@ window.addEventListener("load", (event) => {
 
   // Answer delete func below
 
-  const deleteAnswerBtn = document.querySelectorAll(".answer-delete-btn");
+  const deleteAnswerBtn = document.querySelectorAll(".answer-dlt-btn");
+
   deleteAnswerBtn.forEach((btn) => {
     btn.addEventListener("click", async (e) => {
       e.preventDefault();
-
+      
       const answerId = e.target.id.split("-")[4];
       const questionId = e.target.id.split("-")[1];
 
