@@ -13,7 +13,6 @@ router.get('/', asyncHandler(async (req, res) => {
     limit: 15,
     order: [['createdAt', 'DESC']],
   });
-
   res.render('questions', { questions });
 }))
 
