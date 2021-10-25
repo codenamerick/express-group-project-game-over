@@ -68,8 +68,10 @@ router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
 
    const { up_vote } = req.body
 
-   // if (answer && !userId) {
-   //    console.log('this is working!!--------------');
+   // Need to figure out how to redirect user to login/signup page if they are trying to interact w/vote btns and are not logged in.
+
+   // if (!answer && userId || answer && !userId) {
+   //    res.redirect('/users/login');
    // }
 
    if (answer && userId) {
@@ -90,7 +92,6 @@ router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
          });
 
          if (newVote) {
-            // const up_vote  = newVote.up_vote;
             return res.json({ message: "vote created" })
          }
       }
