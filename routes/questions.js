@@ -12,13 +12,7 @@ router.get('/', asyncHandler(async (req, res) => {
   const questions = await Question.findAll({
     limit: 15,
     order: [['createdAt', 'DESC']],
-    // trying to serve username and answer count w/questions to front-end
-    // include: User
   });
-
-  // console.log('-------------------');
-  // console.log(questions[1].User.user_name);
-  // console.log('-------------------');
 
   res.render('questions', { questions });
 }))
