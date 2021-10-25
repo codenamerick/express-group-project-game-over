@@ -118,6 +118,8 @@ router.post('/:id(\\d+)/votes', requireAuth, asyncHandler(async (req, res) => {
          await vote.destroy();
          return res.json({ message: "down vote removed" });
       }
+   } else {
+      res.redirect('/users/login');
    }
 }));
 
