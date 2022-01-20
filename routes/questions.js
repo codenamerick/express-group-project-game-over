@@ -106,20 +106,28 @@ router.post(
   "/:id(\\d+)/answers",
   requireAuth,
   csrfProtection,
+  answerValidators,
   asyncHandler(async (req, res) => {
     const { answer } = req.body;
     const { user_id } = req.session.auth;
     const question_id = req.params.id;
 
     // implement answer validators
+    const validatorErrors = validationResult(req);
+    let errors = [];
+    if (validatorErrors.isEmpty()) {
 
-    await Answer.create({
-      answer,
-      user_id,
-      question_id,
-    });
+      await Answer.create({
+        answer,
+        user_id,
+        question_id,
+      });
 
-    res.redirect(`/questions/${req.params.id}`);
+      res.redirect(`/questions/${req.params.id}`);
+    } else {
+      errors = validatorErrors.array().map((error) => error.msg);
+    }
+    res.render("question-id", { errors, email, csrfToken: req.csrfToken() });
   })
 );
 
