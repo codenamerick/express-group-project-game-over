@@ -8,6 +8,13 @@ const id = db.User.id;
 
 const { requireAuth } = require("../auth");
 
+// question validators
+const questionValidators = [
+  check("question")
+    .exists({ checkFalsy: true })
+    .withMessage("A questions content can not be blank."),
+];
+
 router.get('/', asyncHandler(async (req, res) => {
   const questions = await Question.findAll({
     limit: 15,
@@ -74,22 +81,31 @@ router.post('/:id(\\d+)/delete', requireAuth, csrfProtection, asyncHandler(async
 // EDITING A QUESTION
 
 // getting question edit page
-router.get('/:id(\\d+)/edit', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+router.get('/:id(\\d+)/edit', requireAuth, csrfProtection,asyncHandler(async (req, res) => {
   const question = await Question.findByPk(req.params.id);
   res.render('question-edit', { question, csrfToken: req.csrfToken() })
 }))
 
 // submitting an edited question
-router.post('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
-  const { question } = req.body;
+router.post('/:id(\\d+)', requireAuth, csrfProtection, questionValidators,asyncHandler(async (req, res) => {
+  const question_content = req.body.question;
+  console.log('===============')
+  console.log(question_content);
+  console.log(req.body)
   const editedQuestion = await Question.findByPk(req.params.id)
 
-  if (question) {
-    editedQuestion.question = question;
+  const validatorErrors = validationResult(req);
+  let errors = [];
+
+  if (question_content.length > 0) {
+    editedQuestion.question = question_content;
     await editedQuestion.save();
     res.redirect(`/questions/${editedQuestion.id}`);
+  } else {
+    errors = validatorErrors.array().map((error) => error.msg);
   }
-
+  let question = editedQuestion
+  res.render("question-edit", {question, errors, csrfToken: req.csrfToken()})
 }))
 
 
