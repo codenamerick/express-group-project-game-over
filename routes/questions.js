@@ -46,7 +46,7 @@ router.post(
 router.get(
   "/:id(\\d+)",
   csrfProtection,
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, res) => {
     const question = await Question.findByPk(req.params.id, {
       include: {
         model: Answer,
@@ -89,9 +89,7 @@ router.get('/:id(\\d+)/edit', requireAuth, csrfProtection,asyncHandler(async (re
 // submitting an edited question
 router.post('/:id(\\d+)', requireAuth, csrfProtection, questionValidators,asyncHandler(async (req, res) => {
   const question_content = req.body.question;
-  console.log('===============')
-  console.log(question_content);
-  console.log(req.body)
+
   const editedQuestion = await Question.findByPk(req.params.id)
 
   const validatorErrors = validationResult(req);
@@ -144,7 +142,10 @@ router.post(
       errors = validatorErrors.array().map((error) => error.msg);
     }
     let question = await Question.findByPk(question_id, {
-      include: Answer
+      include: {
+        model: Answer,
+        include: Vote
+      }
     })
     let sessionUserId = user_id
     res.render("question-id", { errors, question, sessionUserId, csrfToken: req.csrfToken() });
