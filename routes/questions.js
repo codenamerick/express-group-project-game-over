@@ -127,7 +127,12 @@ router.post(
     } else {
       errors = validatorErrors.array().map((error) => error.msg);
     }
-    res.render("question-id", { errors, email, csrfToken: req.csrfToken() });
+    let question = await Question.findByPk(question_id, {
+      include: Answer
+    })
+    let sessionUserId = user_id
+    res.render("question-id", { errors, question, sessionUserId, csrfToken: req.csrfToken() });
+    // res.render("question-id", { errors, csrfToken: req.csrfToken() });
   })
 );
 
