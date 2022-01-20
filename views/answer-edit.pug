@@ -11,6 +11,7 @@ block content
                p= answer.Question.question
             form(action=`/answers/${answer.id}` method='post' class='question-form answer-form-container')
                input(name='_csrf' type='hidden' value=csrfToken)
+               +validationErrorSummary(errors)
                div
                   label(for="answer" ) Edit your answer...
                   textarea(name="answer" value=answer.answer require) #{answer.answer}

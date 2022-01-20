@@ -112,9 +112,9 @@ router.post(
     const { user_id } = req.session.auth;
     const question_id = req.params.id;
 
-    // implement answer validators
     const validatorErrors = validationResult(req);
     let errors = [];
+
     if (validatorErrors.isEmpty()) {
 
       await Answer.create({
