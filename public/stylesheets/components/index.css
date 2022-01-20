@@ -48,10 +48,56 @@ section > img {
     height: 50px;
 }
 
+footer {
+    background: #092c38;
+    color: rgba(255, 255, 255, .6);
+}
+
+.teamWrapper {
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    max-width: 1000px;
+    padding: 64px 16px;
+    width: 100%;
+}
+
+.teamWrapper p {
+    font-size: 20px;
+}
+
+.teamLinkWrapper {
+    margin-top: 4px;
+    text-align: center;
+}
+
+.teamLinkWrapper > div {
+    margin: 5px;
+}
+
+.teamIcon {
+    color: rgba(255, 255, 255, .6);
+    font-size: 28px;
+    margin-right: 4px;
+    transition: all 200ms;
+}
+
+.teamIcon:hover {
+    color: rgba(255, 255, 255, 1);
+    cursor: pointer;
+}
+
 /* --- Media queries below --- */
 
 @media screen and (max-width: 575px) {
     .hero-container {
         margin-top: 135px;
+    }
+
+    .teamWrapper {
+        flex-direction: column;
+        gap: 32px;
+        justify-content: center;
     }
 }
