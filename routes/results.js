@@ -7,13 +7,6 @@ const { Question, User } = db;
 const { Op } = require('sequelize');
 const id = db.User.id
 
-// async function searchQuestions(question) {
-//   // let user = User.findById(id)
-
-//   console.log('test', questions);
-//   return questions;
-// }
-
 
 
 router.get(
