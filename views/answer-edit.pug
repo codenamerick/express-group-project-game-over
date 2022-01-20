@@ -10,6 +10,7 @@ block content
             div.question-list-header
                p= answer.Question.question
             form(action=`/answers/${answer.id}` method='post' class='question-form answer-form-container')
+               +validationErrorSummary(errors)
                input(name='_csrf' type='hidden' value=csrfToken)
                div
                   label(for="answer" ) Edit your answer...

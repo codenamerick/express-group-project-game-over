@@ -215,7 +215,6 @@ router.get(
 
 router.get('/login-demo', csrfProtection, asyncHandler(async (req, res) => {
   let demoUser = await User.findByPk(1);
-
   loginUser(req, res, demoUser);
   res.redirect('/');
 }))

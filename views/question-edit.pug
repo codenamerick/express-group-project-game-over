@@ -10,6 +10,7 @@ block content
             div.question-list-header
                h3= question.title
             form(action=`/questions/${question.id}` method='post' class='question-form answer-form-container')
+               +validationErrorSummary(errors)
                input(name='_csrf' type='hidden' value=csrfToken)
                div
                   label(for='question' id='ask_label') Question Content
