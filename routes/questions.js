@@ -140,16 +140,15 @@ router.post(
       res.redirect(`/questions/${req.params.id}`);
     } else {
       errors = validatorErrors.array().map((error) => error.msg);
+      let question = await Question.findByPk(question_id, {
+        include: {
+          model: Answer,
+          include: Vote
+        }
+      })
+      let sessionUserId = user_id
+      res.render("question-id", { errors, question, sessionUserId, csrfToken: req.csrfToken() });
     }
-    let question = await Question.findByPk(question_id, {
-      include: {
-        model: Answer,
-        include: Vote
-      }
-    })
-    let sessionUserId = user_id
-    res.render("question-id", { errors, question, sessionUserId, csrfToken: req.csrfToken() });
-    // res.render("question-id", { errors, csrfToken: req.csrfToken() });
   })
 );
 
