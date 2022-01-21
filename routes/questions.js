@@ -92,18 +92,18 @@ router.post('/:id(\\d+)', requireAuth, csrfProtection, questionValidators,asyncH
 
   const editedQuestion = await Question.findByPk(req.params.id)
 
-  const validatorErrors = validationResult(req);
-  let errors = [];
+  // const validatorErrors = validationResult(req);
+  // let errors = [];
 
   if (question_content.length > 0) {
     editedQuestion.question = question_content;
     await editedQuestion.save();
     res.redirect(`/questions/${editedQuestion.id}`);
-  } else {
-    errors = validatorErrors.array().map((error) => error.msg);
-  }
-  let question = editedQuestion
-  res.render("question-edit", {question, errors, csrfToken: req.csrfToken()})
+  } // else {
+  //   // errors = validatorErrors.array().map((error) => error.msg);
+  // }
+  // let question = editedQuestion
+  // res.render("question-edit", {question, errors, csrfToken: req.csrfToken()})
 }))
 
 
