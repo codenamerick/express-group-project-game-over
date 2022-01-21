@@ -41,9 +41,9 @@ router.post('/:id(\\d+)', requireAuth, csrfProtection, answerValidators, asyncHa
       res.redirect(`/questions/${questionId}`);
    } else {
       errors = validatorErrors.array().map((error) => error.msg);
+      res.render("answer-edit", { errors, answer, csrfToken: req.csrfToken() })
    }
 
-   res.render("answer-edit", { errors, answer, csrfToken: req.csrfToken() })
 }));
 
 
