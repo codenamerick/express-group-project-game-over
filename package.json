@@ -21,8 +21,8 @@
     "morgan": "~1.9.1",
     "per-env": "^1.0.2",
     "pg": "^8.7.1",
-    "pug": "2.0.4",
-    "sequelize": "^5.22.3",
+    "pug": "^3.0.2",
+    "sequelize": "^6.19.0",
     "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
